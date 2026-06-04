@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Materials</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0B1929;--navy-mid:#112236;--navy-card:#162D44;--navy-light:#1E3A54;--navy-border:#234060;
+  --accent:#F59E0B;--accent-dim:rgba(245,158,11,0.13);--accent-h:#FBBF24;
+  --blue:#3B82F6;--blue-dim:rgba(59,130,246,0.13);
+  --green:#10B981;--green-dim:rgba(16,185,129,0.13);
+  --red:#EF4444;--red-dim:rgba(239,68,68,0.13);
+  --orange:#F97316;--orange-dim:rgba(249,115,22,0.13);
+  --purple:#8B5CF6;--purple-dim:rgba(139,92,246,0.13);
+  --tp:#F0F4F8;--ts:#94A3B8;--tm:#4A6275;
+  --f:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+  --r:10px;--rl:16px;--sw:228px;--aw:355px;
+}
+html,body{height:100%;font-family:var(--f);background:var(--navy);color:var(--tp);font-size:14px;line-height:1.5;overflow:hidden;}
+#app{display:flex;height:100vh;}
+
+/* SIDEBAR */
+#sidebar{width:var(--sw);background:var(--navy-mid);border-right:1px solid var(--navy-border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+.s-logo{padding:16px 15px 13px;border-bottom:1px solid var(--navy-border);}
+.s-logo .lt{font-size:15px;font-weight:600;}.s-logo .lt span{color:var(--accent);}
+.s-logo .ls{font-size:10px;color:var(--tm);margin-top:2px;text-transform:uppercase;letter-spacing:.8px;}
+.s-proj{margin:9px;padding:10px 12px;background:var(--accent-dim);border:1px solid var(--accent);border-radius:var(--r);cursor:pointer;}
+.s-proj .pl{font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;}
+.s-proj .pn{font-size:12px;font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.s-proj .pb{height:3px;background:var(--navy-border);border-radius:2px;overflow:hidden;margin-top:7px;}
+.s-proj .pbf{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;}
+.s-proj .pp{font-size:10px;color:var(--ts);margin-top:3px;}
+.s-sec{padding:11px 8px 3px;}
+.s-sec-lbl{font-size:10px;color:var(--tm);text-transform:uppercase;letter-spacing:1px;padding:0 8px;margin-bottom:3px;}
+.nav{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--ts);font-size:12px;transition:all .13s;user-select:none;}
+.nav:hover{background:var(--navy-light);color:var(--tp);}
+.nav.active{background:var(--accent-dim);color:var(--accent);font-weight:500;}
+.nav i{width:15px;text-align:center;font-size:13px;}
+.nbadge{margin-left:auto;font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;}
+.nbadge.red{background:var(--red);color:#fff;}
+.nbadge.amber{background:var(--accent);color:var(--navy);}
+
+/* MAIN */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+#topbar{background:var(--navy-mid);border-bottom:1px solid var(--navy-border);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px;}
+#topbar-title{font-size:16px;font-weight:600;letter-spacing:-.3px;white-space:nowrap;}
+#topbar-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+#content{flex:1;overflow-y:auto;padding:20px;}
+
+/* AI PANEL */
+#aip{width:var(--aw);background:var(--navy-mid);border-left:1px solid var(--navy-border);display:flex;flex-direction:column;flex-shrink:0;transition:width .22s;}
+#aip.collapsed{width:44px;}
+.aip-hdr{padding:13px 13px 11px;border-bottom:1px solid var(--navy-border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.aip-av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.aip-name{font-size:12px;font-weight:600;}.aip-role{font-size:10px;color:var(--tm);}
+.aip-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.aip-col-btn{background:none;border:none;color:var(--tm);cursor:pointer;padding:4px;font-size:12px;}
+.aip-col-btn:hover{color:var(--tp);}
+#aip.collapsed .aip-name,#aip.collapsed .aip-role,#aip.collapsed .aip-status-txt,#aip.collapsed .aip-msgs,#aip.collapsed .aip-quick,#aip.collapsed .aip-inp-area{display:none;}
+#aip.collapsed .aip-hdr{justify-content:center;}
+.aip-vert{writing-mode:vertical-rl;font-size:10px;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;display:none;padding:16px 0;user-select:none;align-items:center;justify-content:center;height:100%;gap:8px;}
+.aip-vert i{writing-mode:horizontal-tb;font-size:13px;color:var(--accent);}
+#aip.collapsed .aip-vert{display:flex;}
+.aip-msgs{flex:1;overflow-y:auto;padding:13px;display:flex;flex-direction:column;gap:11px;}
+.ai-m{display:flex;flex-direction:column;gap:4px;}
+.ai-m-role{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;}
+.ai-m.mgr .ai-m-role{color:var(--accent);}
+.ai-m.usr .ai-m-role{color:var(--blue);}
+.ai-m-bub{padding:10px 12px;border-radius:11px;font-size:12px;line-height:1.65;}
+.ai-m.mgr .ai-m-bub{background:var(--navy-card);border:1px solid var(--navy-border);border-top-left-radius:3px;}
+.ai-m.usr .ai-m-bub{background:var(--blue-dim);border:1px solid var(--blue);border-top-right-radius:3px;align-self:flex-end;max-width:90%;}
+.ai-m-bub b{color:var(--tp);font-weight:600;}
+.ai-instr{margin-top:5px;}
+.ai-instr-row{display:flex;gap:7px;padding:4px 0;border-bottom:1px solid rgba(35,64,96,.4);}
+.ai-instr-row:last-child{border-bottom:none;}
+.ai-instr-n{color:var(--accent);font-weight:700;font-family:var(--m);font-size:11px;flex-shrink:0;padding-top:1px;}
+.ai-instr-t{font-size:12px;color:var(--ts);}
+.ai-instr-t b{color:var(--tp);}
+.ai-flag{display:flex;align-items:flex-start;gap:6px;padding:5px 8px;border-radius:6px;margin:3px 0;font-size:11.5px;}
+.ai-flag.red{background:var(--red-dim);color:var(--red);}
+.ai-flag.amber{background:var(--accent-dim);color:var(--accent);}
+.ai-flag.green{background:var(--green-dim);color:var(--green);}
+.ai-flag.blue{background:var(--blue-dim);color:var(--blue);}
+.ai-m-time{font-size:10px;color:var(--tm);padding:0 2px;}
+.ai-typing{display:flex;gap:4px;padding:10px 12px;}
+.ai-typing span{width:5px;height:5px;border-radius:50%;background:var(--tm);animation:blink 1.2s infinite;}
+.ai-typing span:nth-child(2){animation-delay:.2s;}
+.ai-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-4px);}}
+.ai-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.ai-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--accent);color:var(--accent);background:var(--accent-dim);transition:all .13s;}
+.ai-chip:hover{background:var(--accent);color:var(--navy);}
+.aip-quick{padding:8px 13px;border-top:1px solid var(--navy-border);display:flex;flex-wrap:wrap;gap:5px;}
+.qbtn{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--navy-border);background:var(--navy-card);color:var(--ts);transition:all .13s;white-space:nowrap;}
+.qbtn:hover{background:var(--navy-light);color:var(--tp);border-color:var(--accent);}
+.qbtn.hi{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);}
+.aip-inp-area{padding:11px 13px;border-top:1px solid var(--navy-border);flex-shrink:0;}
+.aip-inp-wrap{display:flex;gap:7px;align-items:flex-end;}
+.aip-inp{flex:1;background:var(--navy);border:1px solid var(--navy-border);border-radius:9px;padding:8px 11px;color:var(--tp);font-family:var(--f);font-size:12px;resize:none;max-height:90px;overflow-y:auto;transition:border-color .13s;}
+.aip-inp:focus{outline:none;border-color:var(--accent);}
+.aip-send{width:32px;height:32px;border-radius:8px;background:var(--accent);border:none;color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:background .13s;}
+.aip-send:hover{background:var(--accent-h);}
+.aip-send:disabled{background:var(--navy-border);color:var(--tm);cursor:not-allowed;}
+.aip-hint{font-size:10px;color:var(--tm);margin-top:4px;}
+
+/* SHARED */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;cursor:pointer;font-family:var(--f);font-size:13px;font-weight:500;border:none;transition:all .13s;}
+.btn-primary{background:var(--accent);color:var(--navy);}.btn-primary:hover{background:var(--accent-h);}
+.btn-secondary{background:var(--navy-card);color:var(--tp);border:1px solid var(--navy-border);}.btn-secondary:hover{background:var(--navy-light);}
+.btn-danger{background:var(--red-dim);color:var(--red);border:1px solid var(--red);}.btn-danger:hover{background:var(--red);color:#fff;}
+.btn-sm{padding:5px 11px;font-size:12px;}
+.btn-xs{padding:3px 8px;font-size:11px;}
+.card{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:var(--rl);padding:18px;}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.card-title{font-size:11px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.5px;}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:13px;margin-bottom:18px;}
+.sc{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:var(--rl);padding:15px 17px;}
+.sc.acc{border-color:var(--accent);background:var(--accent-dim);}
+.sc.grn{border-color:var(--green);background:var(--green-dim);}
+.sc.red{border-color:var(--red);background:var(--red-dim);}
+.sc.blu{border-color:var(--blue);background:var(--blue-dim);}
+.sc-icon{font-size:17px;margin-bottom:7px;}
+.sc.acc .sc-icon{color:var(--accent);}
+.sc.grn .sc-icon{color:var(--green);}
+.sc.red .sc-icon{color:var(--red);}
+.sc.blu .sc-icon{color:var(--blue);}
+.sc-val{font-size:23px;font-weight:600;font-family:var(--m);letter-spacing:-1px;}
+.sc-lbl{font-size:11px;color:var(--ts);margin-top:2px;}
+.tw{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--tm);padding:8px 11px;text-align:left;border-bottom:1px solid var(--navy-border);}
+tbody tr{border-bottom:1px solid rgba(35,64,96,.4);transition:background .1s;}
+tbody tr:hover{background:var(--navy-light);}
+tbody td{padding:10px 11px;font-size:12px;color:var(--ts);}
+tbody td:first-child{color:var(--tp);font-weight:500;}
+.bdg{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;}
+.bdg-g{background:var(--green-dim);color:var(--green);}
+.bdg-r{background:var(--red-dim);color:var(--red);}
+.bdg-a{background:var(--accent-dim);color:var(--accent);}
+.bdg-b{background:var(--blue-dim);color:var(--blue);}
+.bdg-p{background:var(--purple-dim);color:var(--purple);}
+.bdg-x{background:rgba(148,163,184,.1);color:var(--ts);}
+.bdg-o{background:var(--orange-dim);color:var(--orange);}
+.prog{background:var(--navy-border);border-radius:4px;overflow:hidden;height:5px;}
+.pf{height:100%;border-radius:4px;transition:width .3s;}
+.pf-g{background:var(--green);}.pf-a{background:var(--accent);}.pf-r{background:var(--red);}
+.fg{margin-bottom:13px;}
+.fl{display:block;font-size:11px;font-weight:500;color:var(--ts);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.fi,.fs,.ft{width:100%;padding:8px 11px;background:var(--navy);border:1px solid var(--navy-border);border-radius:8px;color:var(--tp);font-family:var(--f);font-size:12px;transition:border-color .13s;}
+.fi:focus,.fs:focus,.ft:focus{outline:none;border-color:var(--accent);}
+.fs option{background:var(--navy-mid);}
+.ft{resize:vertical;min-height:65px;}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;}
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(5,10,20,.85);z-index:100;align-items:center;justify-content:center;}
+.modal-ov.open{display:flex;}
+.modal{background:var(--navy-mid);border:1px solid var(--navy-border);border-radius:var(--rl);padding:22px;width:540px;max-width:96vw;max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:15px;font-weight:600;margin-bottom:18px;}
+.modal-footer{display:flex;gap:9px;justify-content:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--navy-border);}
+.alert{padding:10px 13px;border-radius:var(--r);margin-bottom:13px;display:flex;align-items:flex-start;gap:8px;font-size:12px;}
+.alert-w{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);}
+.alert-d{background:var(--red-dim);border:1px solid var(--red);color:var(--red);}
+.alert-i{background:var(--blue-dim);border:1px solid var(--blue);color:var(--blue);}
+.alert-g{background:var(--green-dim);border:1px solid var(--green);color:var(--green);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.cbr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.cbl{font-size:11px;color:var(--ts);width:80px;flex-shrink:0;}
+.cbt{flex:1;background:var(--navy-border);border-radius:3px;height:8px;overflow:hidden;}
+.cbf{height:100%;border-radius:3px;}
+.cbv{font-size:11px;font-family:var(--m);color:var(--ts);width:65px;text-align:right;flex-shrink:0;}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--navy-card);border:1px solid var(--navy-border);border-radius:var(--r);padding:10px 16px;font-size:12px;color:var(--tp);z-index:300;transform:translateY(80px);transition:transform .3s;pointer-events:none;max-width:280px;}
+.toast.show{transform:translateY(0);}
+.toast.ok{border-color:var(--green);color:var(--green);}
+.toast.err{border-color:var(--red);color:var(--red);}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--navy-border);border-radius:3px;}
+.empty{text-align:center;padding:40px 20px;color:var(--tm);}
+.empty i{font-size:32px;display:block;margin-bottom:10px;color:var(--navy-border);}
+.divider{font-size:11px;color:var(--tm);text-align:center;padding:6px 0;border-top:1px solid var(--navy-border);margin-top:8px;}
+.inline-edit{background:transparent;border:none;border-bottom:1px solid var(--navy-border);color:var(--tp);font-family:var(--f);font-size:12px;padding:2px 4px;width:100%;outline:none;}
+.inline-edit:focus{border-color:var(--accent);}
+.req{color:var(--red);margin-left:2px;}
+.err-msg{font-size:11px;color:var(--red);margin-top:4px;display:none;}
+.fi.invalid,.fs.invalid{border-color:var(--red);}
+/* section tabs */
+.tabs{display:flex;gap:3px;border-bottom:1px solid var(--navy-border);margin-bottom:18px;}
+.tab{padding:9px 15px;font-size:12px;font-weight:500;color:var(--ts);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .13s;}
+.tab:hover{color:var(--tp);}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+/* project card */
+.pcard{background:var(--navy-card);border:1px solid var(--navy-border);border-radius:var(--rl);padding:16px;cursor:pointer;transition:border-color .15s;}
+.pcard:hover{border-color:var(--accent);}
+.pcard.sel{border-color:var(--accent);background:var(--accent-dim);}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="s-logo">
+    <div class="lt">Site<span>Materials</span></div>
+    <div class="ls">Construction Operations</div>
+  </div>
+  <div class="s-proj" id="s-proj-widget" onclick="showPage('dashboard')">
+    <div class="pl">Active Project</div>
+    <div class="pn" id="s-proj-name">No project selected</div>
+    <div class="pb"><div class="pbf" id="s-proj-bar" style="width:0%"></div></div>
+    <div class="pp" id="s-proj-pct">0% complete</div>
+  </div>
+  <div class="s-sec">
+    <div class="s-sec-lbl">Overview</div>
+    <div class="nav active" data-page="dashboard" onclick="showPage('dashboard')"><i class="fas fa-chart-pie"></i><span>Dashboard</span></div>
+    <div class="nav" data-page="projects" onclick="showPage('projects')"><i class="fas fa-building"></i><span>Projects</span></div>
+  </div>
+  <div class="s-sec">
+    <div class="s-sec-lbl">Materials</div>
+    <div class="nav" data-page="boq" onclick="showPage('boq')"><i class="fas fa-list-check"></i><span>BOQ</span></div>
+    <div class="nav" data-page="inventory" onclick="showPage('inventory')"><i class="fas fa-boxes-stacked"></i><span>Inventory</span><span class="nbadge amber" id="nb-inv" style="display:none">0</span></div>
+    <div class="nav" data-page="consumption" onclick="showPage('consumption')"><i class="fas fa-gauge-high"></i><span>Consumption</span></div>
+    <div class="nav" data-page="tools" onclick="showPage('tools')"><i class="fas fa-screwdriver-wrench"></i><span>Tools & Assets</span></div>
+    <div class="nav" data-page="wastage" onclick="showPage('wastage')"><i class="fas fa-trash-can-arrow-up"></i><span>Wastage</span></div>
+  </div>
+  <div class="s-sec">
+    <div class="s-sec-lbl">Procurement</div>
+    <div class="nav" data-page="requests" onclick="showPage('requests')"><i class="fas fa-file-circle-plus"></i><span>Requests</span><span class="nbadge red" id="nb-req" style="display:none">0</span></div>
+    <div class="nav" data-page="orders" onclick="showPage('orders')"><i class="fas fa-file-invoice"></i><span>Purchase Orders</span></div>
+    <div class="nav" data-page="suppliers" onclick="showPage('suppliers')"><i class="fas fa-truck-ramp-box"></i><span>Suppliers</span></div>
+  </div>
+  <div class="s-sec">
+    <div class="s-sec-lbl">Finance & Admin</div>
+    <div class="nav" data-page="accounting" onclick="showPage('accounting')"><i class="fas fa-coins"></i><span>Accounting</span></div>
+    <div class="nav" data-page="reports" onclick="showPage('reports')"><i class="fas fa-chart-column"></i><span>Reports</span></div>
+    <div class="nav" data-page="users" onclick="showPage('users')"><i class="fas fa-users"></i><span>Users</span></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="topbar">
+    <div id="topbar-title">Dashboard</div>
+    <div id="topbar-actions"></div>
+  </div>
+  <div id="content"></div>
+</div>
+
+<!-- AI PANEL -->
+<div id="aip">
+  <div class="aip-hdr">
+    <div style="display:flex;align-items:center;gap:9px">
+      <div class="aip-av">🏗</div>
+      <div>
+        <div class="aip-name">Foreman AI</div>
+        <div class="aip-role">Virtual Site Manager</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--green)"><div class="aip-dot"></div><span class="aip-status-txt">On Site</span></div>
+      <button class="aip-col-btn" onclick="toggleAI()" id="aip-col-icon"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+  <div class="aip-msgs" id="aip-msgs"></div>
+  <div class="aip-quick" id="aip-quick">
+    <button class="qbtn hi" onclick="sq('Give me the morning site briefing based on current data')"><i class="fas fa-sun"></i> Briefing</button>
+    <button class="qbtn" onclick="sq('What materials are critically low or below minimum stock?')">Stock Check</button>
+    <button class="qbtn" onclick="sq('Review BOQ progress and flag anything at risk')">BOQ Review</button>
+    <button class="qbtn" onclick="sq('What procurement actions need to happen today?')">Procurement</button>
+    <button class="qbtn" onclick="sq('How are we tracking against project budget?')">Budget</button>
+  </div>
+  <div class="aip-inp-area">
+    <div class="aip-inp-wrap">
+      <textarea class="aip-inp" id="aip-inp" rows="1" placeholder="Report an event or ask a question…" onkeydown="aiKey(event)" oninput="aiResize(this)"></textarea>
+      <button class="aip-send" id="aip-send" onclick="sendAI()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+    <div class="aip-hint">Enter to send · Shift+Enter new line</div>
+  </div>
+  <div class="aip-vert" onclick="toggleAI()"><i class="fas fa-hard-hat"></i>Foreman AI</div>
+</div>
+
+</div><!-- /app -->
+
+<div class="modal-ov" id="modal"><div class="modal" id="modal-inner"><div id="modal-body"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  DATA LAYER — localStorage backed, project-scoped
+// ═══════════════════════════════════════════════════════
+
+const STORE_KEY = 'sitematerials_v1';
+
+function loadDB() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return freshDB();
+}
+
+function saveDB() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(DB)); } catch(e) {}
+  updateSidebar();
+  updateBadges();
+}
+
+function freshDB() {
+  return {
+    activeProjectId: null,
+    projects: [],
+    boq: [],           // { id, projectId, item, unit, required, category }
+    inventory: [],     // { id, projectId, item, unit, inStore, minLevel, category, lastUpdated }
+    consumption: [],   // { id, projectId, date, item, qty, unit, zone, recordedBy, notes }
+    requests: [],      // { id, projectId, item, qty, unit, priority, requestedBy, date, status, notes }
+    orders: [],        // { id, projectId, poNo, supplier, item, qty, unit, unitPrice, total, status, orderDate, expectedDate, receivedDate, notes }
+    suppliers: [],     // { id, name, contact, email, materials, rating, notes }
+    wastage: [],       // { id, projectId, date, item, qty, unit, reason, value, reportedBy, notes }
+    accounting: [],    // { id, projectId, date, description, category, amount, type, ref }
+    tools: [],         // { id, projectId, name, serialNo, status, assignedTo, condition, value, notes }
+    users: [
+      { id: uid(), name:'Administrator', email:'admin@sitematerials.co.zm', role:'Administrator', status:'Active', createdAt: now() }
+    ]
+  };
+}
+
+let DB = loadDB();
+
+// Helpers
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function now() { return new Date().toISOString().slice(0,10); }
+function ts() { return new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); }
+function fmt(n) { return Number(n).toLocaleString(); }
+function pct(used, required) { if (!required || required === 0) return 0; return Math.min(100, Math.round((used / required) * 100)); }
+
+// Project helpers
+function activeProject() { return DB.projects.find(p => p.id === DB.activeProjectId) || null; }
+function scopedBoq() { return DB.boq.filter(b => b.projectId === DB.activeProjectId); }
+function scopedInventory() { return DB.inventory.filter(i => i.projectId === DB.activeProjectId); }
+function scopedConsumption() { return DB.consumption.filter(c => c.projectId === DB.activeProjectId); }
+function scopedRequests() { return DB.requests.filter(r => r.projectId === DB.activeProjectId); }
+function scopedOrders() { return DB.orders.filter(o => o.projectId === DB.activeProjectId); }
+function scopedWastage() { return DB.wastage.filter(w => w.projectId === DB.activeProjectId); }
+function scopedAccounting() { return DB.accounting.filter(a => a.projectId === DB.activeProjectId); }
+function scopedTools() { return DB.tools.filter(t => t.projectId === DB.activeProjectId); }
+
+// Compute BOQ usage from consumption records
+function computedBoq() {
+  const cons = scopedConsumption();
+  return scopedBoq().map(b => {
+    const totalUsed = cons.filter(c => c.item === b.item).reduce((s,c) => s + Number(c.qty), 0);
+    const inv = scopedInventory().find(i => i.item === b.item);
+    const totalProcured = DB.orders
+      .filter(o => o.projectId === DB.activeProjectId && o.item === b.item && o.status === 'Delivered')
+      .reduce((s,o) => s + Number(o.qty), 0);
+    return { ...b, used: totalUsed, procured: totalProcured, inStore: inv ? Number(inv.inStore) : 0 };
+  });
+}
+
+// Project progress based on avg BOQ completion
+function computeProgress() {
+  const boq = computedBoq();
+  if (!boq.length) return 0;
+  return Math.round(boq.reduce((s,b) => s + pct(b.used, b.required), 0) / boq.length);
+}
+
+// ─── SIDEBAR / BADGES ───
+function updateSidebar() {
+  const p = activeProject();
+  if (p) {
+    const prog = computeProgress();
+    document.getElementById('s-proj-name').textContent = p.name;
+    document.getElementById('s-proj-bar').style.width = prog + '%';
+    document.getElementById('s-proj-pct').textContent = prog + '% complete';
+  } else {
+    document.getElementById('s-proj-name').textContent = 'No project selected';
+    document.getElementById('s-proj-bar').style.width = '0%';
+    document.getElementById('s-proj-pct').textContent = 'Select a project';
+  }
+}
+function updateBadges() {
+  const low = DB.activeProjectId ? scopedInventory().filter(i => Number(i.inStore) <= Number(i.minLevel)) : [];
+  const pend = DB.activeProjectId ? scopedRequests().filter(r => r.status === 'Pending') : [];
+  const invBadge = document.getElementById('nb-inv');
+  const reqBadge = document.getElementById('nb-req');
+  if (low.length > 0) { invBadge.textContent = low.length; invBadge.style.display = ''; }
+  else invBadge.style.display = 'none';
+  if (pend.length > 0) { reqBadge.textContent = pend.length; reqBadge.style.display = ''; }
+  else reqBadge.style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════════════
+//  ROUTING
+// ═══════════════════════════════════════════════════════
+let currentPage = 'dashboard';
+
+function showPage(page) {
+  currentPage = page;
+  document.querySelectorAll('.nav').forEach(el => el.classList.toggle('active', el.dataset.page === page));
+  const titles = {
+    dashboard:'Dashboard', projects:'Projects', boq:'BOQ Management',
+    inventory:'Inventory', consumption:'Material Consumption', tools:'Tools & Equipment',
+    wastage:'Wastage', requests:'Material Requests', orders:'Purchase Orders',
+    suppliers:'Suppliers', accounting:'Accounting', reports:'Reports', users:'Users'
+  };
+  document.getElementById('topbar-title').textContent = titles[page] || page;
+  document.getElementById('topbar-actions').innerHTML = '';
+  document.getElementById('content').innerHTML = '';
+  const map = {
+    dashboard: pgDashboard, projects: pgProjects, boq: pgBOQ,
+    inventory: pgInventory, consumption: pgConsumption, tools: pgTools,
+    wastage: pgWastage, requests: pgRequests, orders: pgOrders,
+    suppliers: pgSuppliers, accounting: pgAccounting, reports: pgReports, users: pgUsers
+  };
+  if (map[page]) map[page]();
+}
+function setContent(html) { document.getElementById('content').innerHTML = html; }
+function setActions(html) { document.getElementById('topbar-actions').innerHTML = html; }
+
+// Require active project guard
+function requireProject() {
+  if (!DB.activeProjectId) {
+    setContent(`<div class="empty"><i class="fas fa-building"></i><div style="font-size:14px;font-weight:500;margin-bottom:6px">No project selected</div><p style="font-size:12px;margin-bottom:16px">Select or create a project first to manage its data.</p><button class="btn btn-primary" onclick="showPage('projects')"><i class="fas fa-building"></i> Go to Projects</button></div>`);
+    return false;
+  }
+  return true;
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: DASHBOARD
+// ═══════════════════════════════════════════════════════
+function pgDashboard() {
+  if (!DB.activeProjectId) {
+    setContent(`<div class="empty"><i class="fas fa-chart-pie"></i><div style="font-size:14px;font-weight:500;margin-bottom:6px">Welcome to Site Materials</div><p style="font-size:12px;margin-bottom:16px">Create your first project to get started.</p><button class="btn btn-primary" onclick="showPage('projects')"><i class="fas fa-plus"></i> Create Project</button></div>`);
+    return;
+  }
+  const proj = activeProject();
+  const boq = computedBoq();
+  const inv = scopedInventory();
+  const low = inv.filter(i => Number(i.inStore) <= Number(i.minLevel));
+  const crit = inv.filter(i => Number(i.inStore) < Number(i.minLevel) * 0.5);
+  const pend = scopedRequests().filter(r => r.status === 'Pending');
+  const acc = scopedAccounting();
+  const totalExp = acc.filter(a => a.type === 'expense').reduce((s,a) => s+Number(a.amount), 0);
+  const totalInc = acc.filter(a => a.type === 'income').reduce((s,a) => s+Number(a.amount), 0);
+  const avgComp = boq.length ? Math.round(boq.reduce((s,b) => s + pct(b.used,b.required), 0) / boq.length) : 0;
+  const totalWaste = scopedWastage().reduce((s,w) => s+Number(w.value), 0);
+  const budgetUsedPct = proj.budget ? Math.round((totalExp/Number(proj.budget))*100) : 0;
+
+  let html = `<div class="sg">
+    <div class="sc acc"><div class="sc-icon"><i class="fas fa-chart-pie"></i></div><div class="sc-val">${avgComp}%</div><div class="sc-lbl">BOQ Completion</div></div>
+    <div class="sc grn"><div class="sc-icon"><i class="fas fa-boxes-stacked"></i></div><div class="sc-val">${inv.length}</div><div class="sc-lbl">Materials in Store${low.length>0?`<br><span style="color:var(--red);font-size:10px">${low.length} low stock</span>`:''}</div></div>
+    <div class="sc red"><div class="sc-icon"><i class="fas fa-file-circle-plus"></i></div><div class="sc-val">${pend.length}</div><div class="sc-lbl">Pending Requests</div></div>
+    <div class="sc blu"><div class="sc-icon"><i class="fas fa-coins"></i></div><div class="sc-val">K${(totalExp/1000).toFixed(0)}k</div><div class="sc-lbl">Expenditure${proj.budget?`<br><span style="font-size:10px">${budgetUsedPct}% of budget</span>`:''}</div></div>
+  </div>`;
+
+  // Alerts
+  if (crit.length > 0) html += `<div class="alert alert-d" style="margin-bottom:14px"><i class="fas fa-circle-xmark"></i><div><b>Critical stock:</b> ${crit.map(i=>i.item).join(', ')} — below 50% of minimum level</div></div>`;
+  if (low.length > 0 && crit.length === 0) html += `<div class="alert alert-w" style="margin-bottom:14px"><i class="fas fa-triangle-exclamation"></i><div><b>Low stock:</b> ${low.map(i=>i.item).join(', ')}</div></div>`;
+
+  html += `<div class="g2">`;
+
+  // BOQ progress
+  html += `<div class="card"><div class="card-hdr"><div class="card-title">BOQ Progress</div><button class="btn btn-secondary btn-sm" onclick="showPage('boq')">View All</button></div>`;
+  if (!boq.length) html += `<div style="color:var(--tm);font-size:12px">No BOQ items added yet. <a href="#" onclick="showPage('boq')" style="color:var(--accent)">Add items →</a></div>`;
+  else boq.slice(0,6).forEach(b => {
+    const p = pct(b.used,b.required), cls = p>=75?'pf-g':p>=40?'pf-a':'pf-r';
+    html += `<div style="margin-bottom:11px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500">${b.item}</span><span style="font-size:11px;color:var(--tm)">${p}%</span></div><div class="prog"><div class="pf ${cls}" style="width:${p}%"></div></div><div style="display:flex;gap:12px;margin-top:3px;font-size:10px;color:var(--tm)"><span>Required: ${fmt(b.required)} ${b.unit}</span><span>Used: ${fmt(b.used)} ${b.unit}</span></div></div>`;
+  });
+  html += `</div>`;
+
+  // Right column
+  html += `<div>`;
+  // Budget ring
+  html += `<div class="card" style="margin-bottom:14px"><div class="card-hdr"><div class="card-title">Budget Summary</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;font-size:12px">
+      <div><div style="font-size:18px;font-family:var(--m);font-weight:600;color:var(--accent)">K${(Number(proj.budget||0)/1000).toFixed(0)}k</div><div style="color:var(--tm)">Budget</div></div>
+      <div><div style="font-size:18px;font-family:var(--m);font-weight:600;color:var(--red)">K${(totalExp/1000).toFixed(0)}k</div><div style="color:var(--tm)">Spent</div></div>
+      <div><div style="font-size:18px;font-family:var(--m);font-weight:600;color:${totalInc>totalExp?'var(--green)':'var(--red)'}">K${(totalInc/1000).toFixed(0)}k</div><div style="color:var(--tm)">Received</div></div>
+    </div>
+    <div style="margin-top:12px"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ts);margin-bottom:4px"><span>Budget utilisation</span><span>${budgetUsedPct}%</span></div><div class="prog" style="height:8px"><div class="pf ${budgetUsedPct>90?'pf-r':budgetUsedPct>70?'pf-a':'pf-g'}" style="width:${Math.min(100,budgetUsedPct)}%"></div></div></div>
+  </div>`;
+  // Low stock list
+  html += `<div class="card"><div class="card-hdr"><div class="card-title">Stock Alerts</div><button class="btn btn-secondary btn-sm" onclick="showPage('inventory')">Inventory</button></div>`;
+  if (!low.length) html += `<div style="color:var(--tm);font-size:12px"><i class="fas fa-circle-check" style="color:var(--green);margin-right:5px"></i>All stock levels are healthy.</div>`;
+  else low.forEach(i => {
+    const cr = Number(i.inStore) < Number(i.minLevel)*0.5;
+    html += `<div class="alert ${cr?'alert-d':'alert-w'}" style="margin-bottom:6px"><i class="fas fa-triangle-exclamation"></i><div><b>${i.item}</b><br><span style="font-size:11px">In store: ${i.inStore} ${i.unit} · Min: ${i.minLevel} ${i.unit}</span></div></div>`;
+  });
+  html += `</div></div></div>`;
+
+  // Recent activity
+  const recent = [...scopedConsumption(), ...scopedRequests().map(r=>({...r,_type:'req'}))].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
+  html += `<div class="card" style="margin-top:16px"><div class="card-hdr"><div class="card-title">Recent Activity</div></div><div style="display:flex;flex-direction:column;gap:9px">`;
+  if (!recent.length) html += `<div style="color:var(--tm);font-size:12px">No activity yet.</div>`;
+  recent.forEach(a => {
+    const isReq = !!a._type;
+    html += `<div style="display:flex;align-items:flex-start;gap:9px">
+      <div style="width:28px;height:28px;border-radius:7px;background:var(--navy);border:1px solid var(--navy-border);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="fas ${isReq?'fa-file-circle-plus':'fa-gauge-high'}" style="font-size:11px;color:${isReq?'var(--blue)':'var(--green)'}"></i>
+      </div>
+      <div><div style="font-size:12px;font-weight:500">${isReq?'Request raised':'Consumption logged'}: ${a.item} — ${a.qty} ${a.unit}</div>
+      <div style="font-size:10px;color:var(--tm)">${a.date} ${a.zone||a.requestedBy||''}</div></div></div>`;
+  });
+  html += `</div></div>`;
+  setContent(html);
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: PROJECTS
+// ═══════════════════════════════════════════════════════
+function pgProjects() {
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mAddProject()"><i class="fas fa-plus"></i> New Project</button>`);
+  let html = '';
+  if (!DB.projects.length) {
+    html = `<div class="empty"><i class="fas fa-building"></i><div style="font-size:14px;font-weight:500;margin-bottom:6px">No projects yet</div><p style="font-size:12px;margin-bottom:16px">Create your first project to begin tracking materials.</p><button class="btn btn-primary" onclick="mAddProject()"><i class="fas fa-plus"></i> Create Project</button></div>`;
+  } else {
+    html = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:15px">`;
+    DB.projects.forEach(p => {
+      const isActive = p.id === DB.activeProjectId;
+      const acc = DB.accounting.filter(a=>a.projectId===p.id);
+      const spent = acc.filter(a=>a.type==='expense').reduce((s,a)=>s+Number(a.amount),0);
+      const boq = DB.boq.filter(b=>b.projectId===p.id);
+      const cons = DB.consumption.filter(c=>c.projectId===p.id);
+      const avgC = boq.length ? Math.round(boq.reduce((s,b)=>{
+        const used=cons.filter(c=>c.item===b.item).reduce((x,c)=>x+Number(c.qty),0);
+        return s+pct(used,b.required);
+      },0)/boq.length) : 0;
+      html += `<div class="pcard ${isActive?'sel':''}" onclick="setActiveProject('${p.id}')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+          <div><div style="font-size:14px;font-weight:600;margin-bottom:2px">${p.name}</div><div style="font-size:11px;color:var(--tm)">${p.client||'—'}</div></div>
+          <span class="bdg ${p.status==='Active'?'bdg-g':p.status==='Completed'?'bdg-b':'bdg-x'}">${p.status||'Active'}</span>
+        </div>
+        <div style="font-size:11px;color:var(--ts);margin-bottom:10px"><i class="fas fa-location-dot" style="color:var(--tm);margin-right:4px"></i>${p.location||'—'}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px;font-size:11px">
+          <div><div style="color:var(--tm)">Budget</div><div style="font-family:var(--m)">K${p.budget?(Number(p.budget)/1000).toFixed(0)+'k':'—'}</div></div>
+          <div><div style="color:var(--tm)">Spent</div><div style="font-family:var(--m);color:var(--red)">K${(spent/1000).toFixed(0)}k</div></div>
+          <div><div style="color:var(--tm)">BOQ</div><div>${avgC}%</div></div>
+        </div>
+        <div class="prog" style="margin-bottom:10px"><div class="pf ${avgC>=75?'pf-g':avgC>=40?'pf-a':'pf-r'}" style="width:${avgC}%"></div></div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-${isActive?'primary':'secondary'} btn-sm" style="flex:1" onclick="event.stopPropagation();setActiveProject('${p.id}')">${isActive?'<i class="fas fa-check"></i> Active':'Set Active'}</button>
+          <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();mEditProject('${p.id}')"><i class="fas fa-pen"></i></button>
+          <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();delProject('${p.id}')"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  setContent(html);
+}
+function setActiveProject(id) {
+  DB.activeProjectId = id;
+  saveDB();
+  showPage('projects');
+  toast('Project set as active','ok');
+}
+function delProject(id) {
+  if (!confirm('Delete this project and all its data? This cannot be undone.')) return;
+  DB.projects = DB.projects.filter(p=>p.id!==id);
+  ['boq','inventory','consumption','requests','orders','wastage','accounting','tools'].forEach(k => {
+    DB[k] = DB[k].filter(x=>x.projectId!==id);
+  });
+  if (DB.activeProjectId === id) DB.activeProjectId = DB.projects[0]?.id || null;
+  saveDB(); showPage('projects'); toast('Project deleted');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: BOQ
+// ═══════════════════════════════════════════════════════
+function pgBOQ() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mAddBOQItem()"><i class="fas fa-plus"></i> Add BOQ Item</button>`);
+  const boq = computedBoq();
+  const complete = boq.filter(b=>b.used>=b.required).length;
+  const avgC = boq.length ? Math.round(boq.reduce((s,b)=>s+pct(b.used,b.required),0)/boq.length) : 0;
+  let html = `<div class="sg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="sc"><div class="sc-val">${boq.length}</div><div class="sc-lbl">BOQ Items</div></div>
+    <div class="sc acc"><div class="sc-val" style="color:var(--accent)">${avgC}%</div><div class="sc-lbl">Avg Completion</div></div>
+    <div class="sc grn"><div class="sc-val" style="color:var(--green)">${complete}</div><div class="sc-lbl">Completed Items</div></div>
+    <div class="sc red"><div class="sc-val" style="color:var(--red)">${boq.filter(b=>b.procured===0&&b.required>0).length}</div><div class="sc-lbl">Not Procured</div></div>
+  </div>`;
+  if (!boq.length) { html += `<div class="empty"><i class="fas fa-list-check"></i><div>No BOQ items</div><p style="font-size:12px;margin-bottom:14px">Add materials from your Bill of Quantities.</p><button class="btn btn-primary" onclick="mAddBOQItem()"><i class="fas fa-plus"></i> Add First Item</button></div>`; }
+  else {
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>Item</th><th>Category</th><th>Unit</th><th>Required</th><th>In Store</th><th>Used</th><th>Remaining</th><th>Completion</th><th></th></tr></thead><tbody>`;
+    boq.forEach(b => {
+      const rem = b.required - b.used;
+      const p = pct(b.used, b.required);
+      const cls = p>=75?'bdg-g':p>=40?'bdg-a':'bdg-r';
+      html += `<tr>
+        <td>${b.item}</td><td><span class="bdg bdg-x">${b.category}</span></td><td>${b.unit}</td>
+        <td style="font-family:var(--m)">${fmt(b.required)}</td>
+        <td style="font-family:var(--m);color:${b.inStore<b.minLevel?'var(--red)':'var(--tp)'}">${fmt(b.inStore)}</td>
+        <td style="font-family:var(--m)">${fmt(b.used)}</td>
+        <td style="font-family:var(--m);color:${rem>0?'var(--accent)':'var(--green)'}">${fmt(rem)}</td>
+        <td><div style="display:flex;align-items:center;gap:7px"><div class="prog" style="width:70px"><div class="pf ${p>=75?'pf-g':p>=40?'pf-a':'pf-r'}" style="width:${p}%"></div></div><span class="bdg ${cls}">${p}%</span></div></td>
+        <td><button class="btn btn-secondary btn-xs" onclick="mEditBOQItem('${b.id}')"><i class="fas fa-pen"></i></button> <button class="btn btn-danger btn-xs" onclick="delBOQItem('${b.id}')"><i class="fas fa-trash"></i></button></td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function delBOQItem(id) {
+  if (!confirm('Remove this BOQ item?')) return;
+  DB.boq = DB.boq.filter(b=>b.id!==id);
+  saveDB(); showPage('boq'); toast('BOQ item removed');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: INVENTORY
+// ═══════════════════════════════════════════════════════
+function pgInventory() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-secondary btn-sm" onclick="mStockMovement()"><i class="fas fa-right-left"></i> Movement</button><button class="btn btn-primary btn-sm" onclick="mReceiveStock()"><i class="fas fa-plus"></i> Receive Stock</button>`);
+  const inv = scopedInventory();
+  const low = inv.filter(i=>Number(i.inStore)<=Number(i.minLevel));
+  let html = '';
+  if (low.length>0) html += `<div class="alert alert-w"><i class="fas fa-triangle-exclamation"></i><div><b>${low.length} item(s)</b> at or below minimum: ${low.map(i=>i.item).join(', ')}</div></div>`;
+  if (!inv.length) { html += `<div class="empty"><i class="fas fa-boxes-stacked"></i><div>No inventory items</div><p style="font-size:12px;margin-bottom:14px">Receive your first stock delivery to populate inventory.</p><button class="btn btn-primary" onclick="mReceiveStock()"><i class="fas fa-plus"></i> Receive Stock</button></div>`; }
+  else {
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>Material</th><th>Category</th><th>In Store</th><th>Unit</th><th>Min Level</th><th>Status</th><th>Last Updated</th><th>Actions</th></tr></thead><tbody>`;
+    inv.forEach(i => {
+      const lo=Number(i.inStore)<=Number(i.minLevel), cr=Number(i.inStore)<Number(i.minLevel)*0.5;
+      const sb=cr?'<span class="bdg bdg-r">Critical</span>':lo?'<span class="bdg bdg-a">Low</span>':'<span class="bdg bdg-g">OK</span>';
+      html += `<tr><td>${i.item}</td><td><span class="bdg bdg-x">${i.category}</span></td>
+        <td style="font-family:var(--m);color:${lo?'var(--red)':'var(--tp)'};font-weight:600">${fmt(i.inStore)}</td>
+        <td>${i.unit}</td><td style="font-family:var(--m)">${fmt(i.minLevel)}</td>
+        <td>${sb}</td><td style="color:var(--tm)">${i.lastUpdated}</td>
+        <td style="display:flex;gap:5px"><button class="btn btn-secondary btn-xs" onclick="mIssueStock('${i.id}')"><i class="fas fa-arrow-up"></i> Issue</button><button class="btn btn-secondary btn-xs" onclick="mEditInventory('${i.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-danger btn-xs" onclick="delInventory('${i.id}')"><i class="fas fa-trash"></i></button></td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function delInventory(id) {
+  if (!confirm('Remove this inventory item?')) return;
+  DB.inventory = DB.inventory.filter(i=>i.id!==id);
+  saveDB(); showPage('inventory'); toast('Item removed');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: CONSUMPTION
+// ═══════════════════════════════════════════════════════
+function pgConsumption() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mLogConsumption()"><i class="fas fa-plus"></i> Log Consumption</button>`);
+  const cons = scopedConsumption().sort((a,b)=>b.date.localeCompare(a.date));
+  let html = '';
+  if (!cons.length) { html = `<div class="empty"><i class="fas fa-gauge-high"></i><div>No consumption logged</div><p style="font-size:12px;margin-bottom:14px">Log daily material usage to track BOQ progress automatically.</p><button class="btn btn-primary" onclick="mLogConsumption()"><i class="fas fa-plus"></i> Log First Entry</button></div>`; }
+  else {
+    // Today's totals
+    const today = now();
+    const todayCons = cons.filter(c=>c.date===today);
+    if (todayCons.length>0) {
+      html += `<div class="alert alert-i" style="margin-bottom:14px"><i class="fas fa-calendar-day"></i><div><b>Today's consumption:</b> ${todayCons.map(c=>`${c.item} — ${c.qty} ${c.unit}`).join(' · ')}</div></div>`;
+    }
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>Date</th><th>Material</th><th>Qty</th><th>Unit</th><th>Zone / Activity</th><th>Recorded By</th><th>Notes</th><th></th></tr></thead><tbody>`;
+    cons.forEach(c => {
+      html += `<tr><td>${c.date}</td><td>${c.item}</td><td style="font-family:var(--m)">${c.qty}</td><td>${c.unit}</td><td style="color:var(--ts)">${c.zone||'—'}</td><td style="color:var(--ts)">${c.recordedBy||'—'}</td><td style="color:var(--tm)">${c.notes||'—'}</td><td><button class="btn btn-danger btn-xs" onclick="delConsumption('${c.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function delConsumption(id) {
+  if (!confirm('Delete this consumption entry? BOQ progress will update.')) return;
+  // Restore inventory
+  const c = DB.consumption.find(x=>x.id===id);
+  if (c) {
+    const inv = DB.inventory.find(i=>i.projectId===DB.activeProjectId && i.item===c.item);
+    if (inv) { inv.inStore = Number(inv.inStore) + Number(c.qty); inv.lastUpdated = now(); }
+  }
+  DB.consumption = DB.consumption.filter(x=>x.id!==id);
+  saveDB(); showPage('consumption'); toast('Entry deleted, inventory restored');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: TOOLS
+// ═══════════════════════════════════════════════════════
+function pgTools() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mAddTool()"><i class="fas fa-plus"></i> Add Tool</button>`);
+  const tools = scopedTools();
+  const av=tools.filter(t=>t.status==='Available').length, as=tools.filter(t=>t.status==='Assigned').length, is=tools.filter(t=>['Damaged','Under Repair'].includes(t.status)).length;
+  let html = `<div class="sg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="sc"><div class="sc-val">${tools.length}</div><div class="sc-lbl">Total Tools</div></div>
+    <div class="sc grn"><div class="sc-val" style="color:var(--green)">${av}</div><div class="sc-lbl">Available</div></div>
+    <div class="sc blu"><div class="sc-val" style="color:var(--blue)">${as}</div><div class="sc-lbl">Assigned</div></div>
+    <div class="sc red"><div class="sc-val" style="color:var(--red)">${is}</div><div class="sc-lbl">Issues</div></div>
+  </div>`;
+  if (!tools.length) html += `<div class="empty"><i class="fas fa-screwdriver-wrench"></i><div>No tools registered</div><button class="btn btn-primary" onclick="mAddTool()" style="margin-top:14px"><i class="fas fa-plus"></i> Register First Tool</button></div>`;
+  else {
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>Tool / Equipment</th><th>Serial No.</th><th>Status</th><th>Assigned To</th><th>Condition</th><th>Value (K)</th><th>Actions</th></tr></thead><tbody>`;
+    tools.forEach(t => {
+      const cls={Available:'bdg-g',Assigned:'bdg-b',Damaged:'bdg-r','Under Repair':'bdg-o',Lost:'bdg-x',Retired:'bdg-x'}[t.status]||'bdg-x';
+      html += `<tr><td>${t.name}</td><td style="font-family:var(--m);color:var(--tm)">${t.serialNo||'—'}</td><td><span class="bdg ${cls}">${t.status}</span></td><td style="color:var(--ts)">${t.assignedTo||'—'}</td><td>${t.condition}</td><td style="font-family:var(--m)">${fmt(t.value)}</td><td style="display:flex;gap:5px"><button class="btn btn-secondary btn-xs" onclick="mAssignTool('${t.id}')">Assign</button><button class="btn btn-secondary btn-xs" onclick="mEditTool('${t.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-danger btn-xs" onclick="delTool('${t.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function delTool(id) {
+  if (!confirm('Remove this tool?')) return;
+  DB.tools = DB.tools.filter(t=>t.id!==id);
+  saveDB(); showPage('tools'); toast('Tool removed');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: WASTAGE
+// ═══════════════════════════════════════════════════════
+function pgWastage() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mLogWastage()"><i class="fas fa-plus"></i> Log Wastage</button>`);
+  const wst = scopedWastage().sort((a,b)=>b.date.localeCompare(a.date));
+  const tv = wst.reduce((s,w)=>s+Number(w.value),0);
+  let html = '';
+  if (tv>0) html += `<div class="alert alert-d"><i class="fas fa-triangle-exclamation"></i>Total recorded wastage: <b>K${fmt(tv)}</b> across ${wst.length} incident(s).</div>`;
+  if (!wst.length) html += `<div class="empty"><i class="fas fa-trash-can-arrow-up"></i><div>No wastage recorded</div><button class="btn btn-primary" onclick="mLogWastage()" style="margin-top:14px"><i class="fas fa-plus"></i> Log Wastage</button></div>`;
+  else {
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>Date</th><th>Material</th><th>Qty</th><th>Unit</th><th>Reason</th><th>Est. Value</th><th>Reported By</th><th></th></tr></thead><tbody>`;
+    wst.forEach(w => {
+      html += `<tr><td>${w.date}</td><td>${w.item}</td><td style="font-family:var(--m)">${w.qty}</td><td>${w.unit}</td><td style="color:var(--ts)">${w.reason}</td><td style="font-family:var(--m);color:var(--red)">K${fmt(w.value)}</td><td style="color:var(--ts)">${w.reportedBy||'—'}</td><td><button class="btn btn-danger btn-xs" onclick="delWastage('${w.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function delWastage(id) {
+  if (!confirm('Delete this wastage record?')) return;
+  DB.wastage = DB.wastage.filter(w=>w.id!==id);
+  saveDB(); showPage('wastage'); toast('Wastage record deleted');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: REQUESTS
+// ═══════════════════════════════════════════════════════
+function pgRequests() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mRaiseRequest()"><i class="fas fa-plus"></i> Raise Request</button>`);
+  const reqs = scopedRequests().sort((a,b)=>b.date.localeCompare(a.date));
+  const pend = reqs.filter(r=>r.status==='Pending');
+  let html = '';
+  if (pend.length>0) html += `<div class="alert alert-w"><i class="fas fa-clock"></i><b>${pend.length} request(s)</b> awaiting approval.</div>`;
+  if (!reqs.length) html += `<div class="empty"><i class="fas fa-file-circle-plus"></i><div>No requests yet</div><button class="btn btn-primary" onclick="mRaiseRequest()" style="margin-top:14px"><i class="fas fa-plus"></i> Raise First Request</button></div>`;
+  else {
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>Item</th><th>Qty</th><th>Unit</th><th>Priority</th><th>Requested By</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody>`;
+    reqs.forEach(r => {
+      const sc={Pending:'bdg-a',Approved:'bdg-b',Ordered:'bdg-p',Delivered:'bdg-g',Rejected:'bdg-r'}[r.status]||'bdg-x';
+      const pc={High:'bdg-r',Medium:'bdg-a',Low:'bdg-x'}[r.priority]||'bdg-x';
+      html += `<tr><td>${r.item}<br><span style="font-size:10px;color:var(--tm)">${r.notes||''}</span></td>
+        <td style="font-family:var(--m)">${r.qty}</td><td>${r.unit}</td>
+        <td><span class="bdg ${pc}">${r.priority}</span></td>
+        <td style="color:var(--ts)">${r.requestedBy||'—'}</td>
+        <td style="color:var(--tm)">${r.date}</td>
+        <td><span class="bdg ${sc}">${r.status}</span></td>
+        <td style="display:flex;gap:5px">
+          ${r.status==='Pending'?`<button class="btn btn-primary btn-xs" onclick="approveRequest('${r.id}')">Approve</button><button class="btn btn-danger btn-xs" onclick="rejectRequest('${r.id}')">Reject</button>`:''}
+          ${r.status==='Approved'?`<button class="btn btn-secondary btn-xs" onclick="convertRequestToPO('${r.id}')"><i class="fas fa-file-invoice"></i> Create PO</button>`:''}
+          <button class="btn btn-danger btn-xs" onclick="delRequest('${r.id}')"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function approveRequest(id) {
+  const r=DB.requests.find(x=>x.id===id); if(!r) return;
+  r.status='Approved'; saveDB(); showPage('requests'); toast('Request approved','ok');
+}
+function rejectRequest(id) {
+  const r=DB.requests.find(x=>x.id===id); if(!r) return;
+  r.status='Rejected'; saveDB(); showPage('requests'); toast('Request rejected');
+}
+function delRequest(id) {
+  if (!confirm('Delete this request?')) return;
+  DB.requests=DB.requests.filter(x=>x.id!==id);
+  saveDB(); showPage('requests'); toast('Request deleted');
+}
+function convertRequestToPO(id) {
+  const r=DB.requests.find(x=>x.id===id); if(!r) return;
+  // Prefill the Create PO modal with request data
+  mCreatePO({item:r.item, qty:r.qty, unit:r.unit, requestId:r.id});
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: ORDERS
+// ═══════════════════════════════════════════════════════
+function pgOrders() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mCreatePO({})"><i class="fas fa-plus"></i> Create PO</button>`);
+  const orders = scopedOrders().sort((a,b)=>b.orderDate.localeCompare(a.orderDate));
+  const statCounts = ['Draft','Confirmed','In Transit','Delivered','Cancelled'].map(s=>({s, c:orders.filter(o=>o.status===s).length}));
+  let html = `<div class="sg" style="grid-template-columns:repeat(5,1fr)">
+    ${statCounts.map(x=>`<div class="sc"><div class="sc-val">${x.c}</div><div class="sc-lbl">${x.s}</div></div>`).join('')}
+  </div>`;
+  if (!orders.length) html += `<div class="empty"><i class="fas fa-file-invoice"></i><div>No purchase orders</div><button class="btn btn-primary" onclick="mCreatePO({})" style="margin-top:14px"><i class="fas fa-plus"></i> Create First PO</button></div>`;
+  else {
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>PO #</th><th>Supplier</th><th>Item</th><th>Qty</th><th>Unit Price</th><th>Total</th><th>Expected</th><th>Status</th><th>Actions</th></tr></thead><tbody>`;
+    orders.forEach(o => {
+      const cls={Delivered:'bdg-g','In Transit':'bdg-b',Confirmed:'bdg-p',Draft:'bdg-a',Cancelled:'bdg-r'}[o.status]||'bdg-x';
+      html += `<tr><td style="font-family:var(--m)">${o.poNo}</td><td>${o.supplier}</td><td>${o.item}</td>
+        <td style="font-family:var(--m)">${o.qty} ${o.unit}</td>
+        <td style="font-family:var(--m)">K${fmt(o.unitPrice)}</td>
+        <td style="font-family:var(--m);color:var(--accent)">K${fmt(o.total)}</td>
+        <td style="color:var(--tm)">${o.expectedDate||'—'}</td>
+        <td><span class="bdg ${cls}">${o.status}</span></td>
+        <td style="display:flex;gap:5px">
+          ${o.status==='Confirmed'?`<button class="btn btn-secondary btn-xs" onclick="markInTransit('${o.id}')">In Transit</button>`:''}
+          ${o.status==='In Transit'?`<button class="btn btn-primary btn-xs" onclick="mReceiveDelivery('${o.id}')"><i class="fas fa-truck-ramp-box"></i> Receive</button>`:''}
+          ${o.status==='Draft'?`<button class="btn btn-primary btn-xs" onclick="confirmOrder('${o.id}')">Confirm</button>`:''}
+          <button class="btn btn-danger btn-xs" onclick="delOrder('${o.id}')"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function confirmOrder(id) {
+  const o=DB.orders.find(x=>x.id===id); if(!o) return;
+  o.status='Confirmed'; saveDB(); showPage('orders'); toast('PO confirmed','ok');
+}
+function markInTransit(id) {
+  const o=DB.orders.find(x=>x.id===id); if(!o) return;
+  o.status='In Transit'; saveDB(); showPage('orders'); toast('Marked as in transit');
+}
+function delOrder(id) {
+  if (!confirm('Delete this purchase order?')) return;
+  DB.orders=DB.orders.filter(x=>x.id!==id);
+  saveDB(); showPage('orders'); toast('PO deleted');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: SUPPLIERS
+// ═══════════════════════════════════════════════════════
+function pgSuppliers() {
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mAddSupplier()"><i class="fas fa-plus"></i> Add Supplier</button>`);
+  let html = '';
+  if (!DB.suppliers.length) html = `<div class="empty"><i class="fas fa-truck-ramp-box"></i><div>No suppliers added</div><button class="btn btn-primary" onclick="mAddSupplier()" style="margin-top:14px"><i class="fas fa-plus"></i> Add Supplier</button></div>`;
+  else {
+    html = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px">`;
+    DB.suppliers.forEach(s => {
+      const r = Number(s.rating)||0;
+      const stars = '★'.repeat(r)+'☆'.repeat(5-r);
+      const orderCount = DB.orders.filter(o=>o.supplier===s.name).length;
+      html += `<div class="card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <div style="width:36px;height:36px;border-radius:9px;background:var(--accent-dim);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center"><i class="fas fa-truck" style="color:var(--accent)"></i></div>
+        <div><div style="font-weight:600;font-size:13px">${s.name}</div><div style="font-size:11px;color:var(--accent)">${stars}</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--ts);margin-bottom:8px">${s.materials||'—'}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;margin-bottom:10px">
+        <div><div style="color:var(--tm)">Contact</div><div>${s.contact||'—'}</div></div>
+        <div><div style="color:var(--tm)">Orders</div><div>${orderCount}</div></div>
+        ${s.email?`<div style="grid-column:span 2"><div style="color:var(--tm)">Email</div><div>${s.email}</div></div>`:''}
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-secondary btn-sm" style="flex:1" onclick="mCreatePO({supplier:'${s.name}'})"><i class="fas fa-file-invoice"></i> Create PO</button>
+        <button class="btn btn-secondary btn-sm" onclick="mEditSupplier('${s.id}')"><i class="fas fa-pen"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="delSupplier('${s.id}')"><i class="fas fa-trash"></i></button>
+      </div></div>`;
+    });
+    html += `</div>`;
+  }
+  setContent(html);
+}
+function delSupplier(id) {
+  if (!confirm('Delete this supplier?')) return;
+  DB.suppliers=DB.suppliers.filter(s=>s.id!==id);
+  saveDB(); showPage('suppliers'); toast('Supplier deleted');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: ACCOUNTING
+// ═══════════════════════════════════════════════════════
+function pgAccounting() {
+  if (!requireProject()) return;
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mAddTransaction()"><i class="fas fa-plus"></i> Add Transaction</button>`);
+  const acc = scopedAccounting().sort((a,b)=>b.date.localeCompare(a.date));
+  const te=acc.filter(a=>a.type==='expense').reduce((s,a)=>s+Number(a.amount),0);
+  const ti=acc.filter(a=>a.type==='income').reduce((s,a)=>s+Number(a.amount),0);
+  const bal=ti-te;
+  const proj=activeProject();
+  const budgetLeft=(Number(proj?.budget||0))-te;
+
+  // Category breakdown
+  const cats={};
+  acc.filter(a=>a.type==='expense').forEach(a=>{cats[a.category]=(cats[a.category]||0)+Number(a.amount);});
+  const maxCat=Math.max(...Object.values(cats),1);
+
+  let html = `<div class="sg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="sc grn"><div class="sc-val" style="color:var(--green)">K${(ti/1000).toFixed(0)}k</div><div class="sc-lbl">Income</div></div>
+    <div class="sc red"><div class="sc-val" style="color:var(--red)">K${(te/1000).toFixed(0)}k</div><div class="sc-lbl">Expenditure</div></div>
+    <div class="sc ${bal>=0?'grn':'red'}"><div class="sc-val" style="color:${bal>=0?'var(--green)':'var(--red)'}">K${(Math.abs(bal)/1000).toFixed(0)}k</div><div class="sc-lbl">${bal>=0?'Surplus':'Deficit'}</div></div>
+    <div class="sc acc"><div class="sc-val" style="color:var(--accent)">K${(budgetLeft/1000).toFixed(0)}k</div><div class="sc-lbl">Budget Remaining</div></div>
+  </div>
+  <div class="g2" style="margin-bottom:18px">
+    <div class="card"><div class="card-hdr"><div class="card-title">Expenditure by Category</div></div>
+      ${Object.keys(cats).length===0?'<div style="color:var(--tm);font-size:12px">No expenses recorded.</div>':Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="cbr"><div class="cbl">${c}</div><div class="cbt"><div class="cbf" style="width:${Math.round(v/maxCat*100)}%;background:var(--accent)"></div></div><div class="cbv">K${(v/1000).toFixed(0)}k</div></div>`).join('')}
+    </div>
+    <div class="card"><div class="card-hdr"><div class="card-title">Budget Utilisation</div></div>
+      ${proj?.budget?`
+      <div style="text-align:center;margin-bottom:10px">
+        <div style="font-size:28px;font-family:var(--m);font-weight:600;color:${te>Number(proj.budget)?'var(--red)':'var(--accent)'}">${Math.round((te/Number(proj.budget))*100)}%</div>
+        <div style="font-size:11px;color:var(--tm)">of K${(Number(proj.budget)/1000).toFixed(0)}k budget used</div>
+      </div>
+      <div class="prog" style="height:10px"><div class="pf ${te>Number(proj.budget)*0.9?'pf-r':te>Number(proj.budget)*0.7?'pf-a':'pf-g'}" style="width:${Math.min(100,Math.round((te/Number(proj.budget))*100))}%"></div></div>`:'<div style="color:var(--tm);font-size:12px">No budget set for this project.</div>'}
+    </div>
+  </div>`;
+
+  if (!acc.length) html += `<div class="empty"><i class="fas fa-coins"></i><div>No transactions yet</div></div>`;
+  else {
+    html += `<div class="card"><div class="tw"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Ref</th><th>Amount</th><th>Type</th><th></th></tr></thead><tbody>`;
+    acc.forEach(a => {
+      html += `<tr><td>${a.date}</td><td>${a.description}</td><td><span class="bdg bdg-x">${a.category}</span></td><td style="color:var(--tm);font-family:var(--m)">${a.ref||'—'}</td><td style="font-family:var(--m);font-weight:600;color:${a.type==='income'?'var(--green)':'var(--red)'}">${a.type==='income'?'+':'-'}K${fmt(a.amount)}</td><td><span class="bdg ${a.type==='income'?'bdg-g':'bdg-r'}">${a.type}</span></td><td><button class="btn btn-danger btn-xs" onclick="delTransaction('${a.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+  setContent(html);
+}
+function delTransaction(id) {
+  if (!confirm('Delete this transaction?')) return;
+  DB.accounting=DB.accounting.filter(a=>a.id!==id);
+  saveDB(); showPage('accounting'); toast('Transaction deleted');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: REPORTS
+// ═══════════════════════════════════════════════════════
+function pgReports() {
+  if (!requireProject()) return;
+  const proj=activeProject();
+  const boq=computedBoq();
+  const inv=scopedInventory();
+  const acc=scopedAccounting();
+  const te=acc.filter(a=>a.type==='expense').reduce((s,a)=>s+Number(a.amount),0);
+  const ti=acc.filter(a=>a.type==='income').reduce((s,a)=>s+Number(a.amount),0);
+  const avgC=boq.length?Math.round(boq.reduce((s,b)=>s+pct(b.used,b.required),0)/boq.length):0;
+  const totalWaste=scopedWastage().reduce((s,w)=>s+Number(w.value),0);
+  let html=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:24px">
+    ${[{i:'fa-list-check',t:'BOQ Completion',v:`${avgC}%`,c:'var(--accent)'},{i:'fa-boxes-stacked',t:'Inventory Items',v:inv.length,c:'var(--blue)'},{i:'fa-coins',t:'Total Expenditure',v:`K${(te/1000).toFixed(1)}k`,c:'var(--red)'},{i:'fa-hand-holding-dollar',t:'Income Received',v:`K${(ti/1000).toFixed(1)}k`,c:'var(--green)'},{i:'fa-trash-can-arrow-up',t:'Wastage Value',v:`K${fmt(totalWaste)}`,c:'var(--orange)'},{i:'fa-building',t:'Project Progress',v:`${computeProgress()}%`,c:'var(--purple)'}].map(x=>`<div class="card" style="text-align:center"><div style="font-size:24px;color:${x.c};margin-bottom:8px"><i class="fas ${x.i}"></i></div><div style="font-size:22px;font-family:var(--m);font-weight:600;color:${x.c}">${x.v}</div><div style="font-size:11px;color:var(--tm);margin-top:3px">${x.t}</div></div>`).join('')}
+  </div>
+  <div class="card"><div class="card-hdr"><div class="card-title">BOQ Summary Table</div><button class="btn btn-secondary btn-sm" onclick="showPage('boq')">Full BOQ →</button></div><div class="tw"><table><thead><tr><th>Item</th><th>Required</th><th>Used</th><th>Remaining</th><th>Completion</th></tr></thead><tbody>
+    ${boq.map(b=>{const p=pct(b.used,b.required);return `<tr><td>${b.item}</td><td style="font-family:var(--m)">${fmt(b.required)} ${b.unit}</td><td style="font-family:var(--m)">${fmt(b.used)}</td><td style="font-family:var(--m);color:var(--accent)">${fmt(b.required-b.used)}</td><td><div style="display:flex;align-items:center;gap:7px"><div class="prog" style="width:80px"><div class="pf ${p>=75?'pf-g':p>=40?'pf-a':'pf-r'}" style="width:${p}%"></div></div>${p}%</div></td></tr>`}).join('')}
+  </tbody></table></div></div>`;
+  setContent(html);
+}
+
+// ═══════════════════════════════════════════════════════
+//  PAGE: USERS
+// ═══════════════════════════════════════════════════════
+function pgUsers() {
+  setActions(`<button class="btn btn-primary btn-sm" onclick="mAddUser()"><i class="fas fa-plus"></i> Add User</button>`);
+  const rc={Administrator:'bdg-a','Site Manager':'bdg-b','Procurement Officer':'bdg-p','Site Supervisor':'bdg-g','Storekeeper':'bdg-o'};
+  let html=`<div class="card"><div class="tw"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody>`;
+  DB.users.forEach(u=>{
+    html+=`<tr><td><div style="display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent)">${u.name.split(' ').map(n=>n[0]).slice(0,2).join('')}</div>${u.name}</div></td><td style="color:var(--tm)">${u.email}</td><td><span class="bdg ${rc[u.role]||'bdg-x'}">${u.role}</span></td><td><span class="bdg ${u.status==='Active'?'bdg-g':'bdg-x'}">${u.status}</span></td><td style="display:flex;gap:5px"><button class="btn btn-secondary btn-xs" onclick="mEditUser('${u.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-danger btn-xs" onclick="delUser('${u.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+  });
+  html+=`</tbody></table></div></div>`;
+  setContent(html);
+}
+function delUser(id) {
+  if (DB.users.length===1) { toast('Cannot delete the only user','err'); return; }
+  if (!confirm('Delete this user?')) return;
+  DB.users=DB.users.filter(u=>u.id!==id);
+  saveDB(); showPage('users'); toast('User deleted');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — PROJECTS
+// ═══════════════════════════════════════════════════════
+function mAddProject() {
+  openModal('New Project', `
+    <div class="fg2">
+      <div class="fg"><label class="fl">Project Name <span class="req">*</span></label><input class="fi" id="m-pname" placeholder="e.g. Nakambala Road Rehab"></div>
+      <div class="fg"><label class="fl">Client</label><input class="fi" id="m-pclient" placeholder="Client or employer"></div>
+      <div class="fg"><label class="fl">Location</label><input class="fi" id="m-ploc" placeholder="Site location"></div>
+      <div class="fg"><label class="fl">Project Status</label><select class="fs" id="m-pstatus"><option>Active</option><option>On Hold</option><option>Completed</option></select></div>
+      <div class="fg"><label class="fl">Contract Value / Budget (K)</label><input class="fi" id="m-pbudget" type="number" min="0" placeholder="0.00"></div>
+      <div class="fg"><label class="fl">Contract Number / Ref</label><input class="fi" id="m-pref" placeholder="Optional"></div>
+      <div class="fg"><label class="fl">Start Date</label><input class="fi" id="m-pstart" type="date"></div>
+      <div class="fg"><label class="fl">End Date</label><input class="fi" id="m-pend" type="date"></div>
+    </div>
+    <div class="fg"><label class="fl">Description / Scope</label><textarea class="ft" id="m-pdesc" placeholder="Brief project description…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveProject(null)"><i class="fas fa-check"></i> Create Project</button>`);
+}
+function mEditProject(id) {
+  const p=DB.projects.find(x=>x.id===id); if(!p) return;
+  openModal('Edit Project', `
+    <div class="fg2">
+      <div class="fg"><label class="fl">Project Name <span class="req">*</span></label><input class="fi" id="m-pname" value="${esc(p.name)}"></div>
+      <div class="fg"><label class="fl">Client</label><input class="fi" id="m-pclient" value="${esc(p.client||'')}"></div>
+      <div class="fg"><label class="fl">Location</label><input class="fi" id="m-ploc" value="${esc(p.location||'')}"></div>
+      <div class="fg"><label class="fl">Status</label><select class="fs" id="m-pstatus">${['Active','On Hold','Completed'].map(s=>`<option${p.status===s?' selected':''}>${s}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Budget (K)</label><input class="fi" id="m-pbudget" type="number" value="${p.budget||''}"></div>
+      <div class="fg"><label class="fl">Contract Ref</label><input class="fi" id="m-pref" value="${esc(p.ref||'')}"></div>
+      <div class="fg"><label class="fl">Start Date</label><input class="fi" id="m-pstart" type="date" value="${p.startDate||''}"></div>
+      <div class="fg"><label class="fl">End Date</label><input class="fi" id="m-pend" type="date" value="${p.endDate||''}"></div>
+    </div>
+    <div class="fg"><label class="fl">Description</label><textarea class="ft" id="m-pdesc">${esc(p.description||'')}</textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveProject('${id}')"><i class="fas fa-check"></i> Save Changes</button>`);
+}
+function saveProject(id) {
+  const name=v('m-pname');
+  if (!name.trim()) { highlight('m-pname'); toast('Project name is required','err'); return; }
+  const data={
+    id: id||uid(), name:name.trim(), client:v('m-pclient'), location:v('m-ploc'),
+    status:v('m-pstatus'), budget:v('m-pbudget')||0, ref:v('m-pref'),
+    startDate:v('m-pstart'), endDate:v('m-pend'), description:v('m-pdesc'),
+    createdAt: id ? undefined : now()
+  };
+  if (id) { const i=DB.projects.findIndex(p=>p.id===id); DB.projects[i]={...DB.projects[i],...data}; }
+  else { DB.projects.push(data); if(!DB.activeProjectId) DB.activeProjectId=data.id; }
+  saveDB(); closeModal(); showPage('projects'); toast(id?'Project updated':'Project created','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — BOQ
+// ═══════════════════════════════════════════════════════
+function mAddBOQItem() {
+  // Check if inventory items exist to pre-populate suggestions
+  const invItems = scopedInventory().map(i=>i.item);
+  openModal('Add BOQ Item', `
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Material / Item Name <span class="req">*</span></label><input class="fi" id="m-bitem" placeholder="e.g. Portland Cement" list="inv-items-list"><datalist id="inv-items-list">${invItems.map(i=>`<option value="${i}">`).join('')}</datalist></div>
+      <div class="fg"><label class="fl">Category</label><select class="fs" id="m-bcat"><option>Masonry</option><option>Structural</option><option>Concrete</option><option>Timber</option><option>Roofing</option><option>Finishes</option><option>Services</option><option>Earthworks</option><option>Other</option></select></div>
+      <div class="fg"><label class="fl">Unit <span class="req">*</span></label><select class="fs" id="m-bunit"><option>Bags</option><option>Tons</option><option>Units</option><option>Lengths</option><option>Sheets</option><option>m²</option><option>m³</option><option>m</option><option>Litres</option><option>Rolls</option><option>Pieces</option></select></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Required Quantity <span class="req">*</span></label><input class="fi" id="m-breq" type="number" min="0.01" step="any" placeholder="Total quantity required for the project"></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveBOQItem(null)"><i class="fas fa-check"></i> Add Item</button>`);
+}
+function mEditBOQItem(id) {
+  const b=DB.boq.find(x=>x.id===id); if(!b) return;
+  openModal('Edit BOQ Item', `
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Item Name <span class="req">*</span></label><input class="fi" id="m-bitem" value="${esc(b.item)}"></div>
+      <div class="fg"><label class="fl">Category</label><select class="fs" id="m-bcat">${['Masonry','Structural','Concrete','Timber','Roofing','Finishes','Services','Earthworks','Other'].map(c=>`<option${b.category===c?' selected':''}>${c}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Unit</label><select class="fs" id="m-bunit">${['Bags','Tons','Units','Lengths','Sheets','m²','m³','m','Litres','Rolls','Pieces'].map(u=>`<option${b.unit===u?' selected':''}>${u}</option>`).join('')}</select></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Required Quantity</label><input class="fi" id="m-breq" type="number" value="${b.required}"></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveBOQItem('${id}')"><i class="fas fa-check"></i> Save</button>`);
+}
+function saveBOQItem(id) {
+  const item=v('m-bitem'), req=Number(v('m-breq'));
+  if(!item.trim()){highlight('m-bitem');toast('Item name required','err');return;}
+  if(!req||req<=0){highlight('m-breq');toast('Required quantity must be greater than 0','err');return;}
+  const data={id:id||uid(),projectId:DB.activeProjectId,item:item.trim(),category:v('m-bcat'),unit:v('m-bunit'),required:req};
+  if(id){const i=DB.boq.findIndex(x=>x.id===id);DB.boq[i]={...DB.boq[i],...data};}
+  else DB.boq.push(data);
+  // Auto-create inventory item if not existing
+  if(!id){
+    const exists=DB.inventory.find(i=>i.projectId===DB.activeProjectId&&i.item===data.item);
+    if(!exists){
+      DB.inventory.push({id:uid(),projectId:DB.activeProjectId,item:data.item,unit:data.unit,inStore:0,minLevel:Math.round(data.required*0.1),category:data.category,lastUpdated:now()});
+    }
+  }
+  saveDB();closeModal();showPage('boq');toast(id?'BOQ item updated':'BOQ item added — inventory slot created','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — INVENTORY
+// ═══════════════════════════════════════════════════════
+function mReceiveStock() {
+  const boqItems=scopedBoq().map(b=>b.item);
+  const suppliers=DB.suppliers.map(s=>s.name);
+  openModal('Receive Stock Delivery', `
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Material <span class="req">*</span></label><input class="fi" id="m-ritem" list="boq-items-list" placeholder="Select or type material name"><datalist id="boq-items-list">${boqItems.map(i=>`<option value="${i}">`).join('')}</datalist></div>
+      <div class="fg"><label class="fl">Quantity Received <span class="req">*</span></label><input class="fi" id="m-rqty" type="number" min="0.01" step="any" placeholder="0"></div>
+      <div class="fg"><label class="fl">Unit <span class="req">*</span></label><select class="fs" id="m-runit"><option>Bags</option><option>Tons</option><option>Units</option><option>Lengths</option><option>Sheets</option><option>m²</option><option>m³</option><option>m</option><option>Litres</option><option>Rolls</option><option>Pieces</option></select></div>
+      <div class="fg"><label class="fl">Supplier</label><input class="fi" id="m-rsup" list="sup-list" placeholder="Supplier name"><datalist id="sup-list">${suppliers.map(s=>`<option value="${s}">`).join('')}</datalist></div>
+      <div class="fg"><label class="fl">Delivery Note #</label><input class="fi" id="m-rdn" placeholder="DN-XXXXX"></div>
+      <div class="fg"><label class="fl">Unit Cost (K)</label><input class="fi" id="m-rcost" type="number" min="0" step="any" placeholder="0.00"></div>
+      <div class="fg"><label class="fl">Date Received</label><input class="fi" id="m-rdate" type="date" value="${now()}"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes / Condition</label><textarea class="ft" id="m-rnotes" placeholder="Any notes on quantity, condition, shortages…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveReceiveStock()"><i class="fas fa-check"></i> Confirm Receipt</button>`);
+}
+function saveReceiveStock() {
+  const item=v('m-ritem'), qty=Number(v('m-rqty'));
+  if(!item.trim()){highlight('m-ritem');toast('Material name required','err');return;}
+  if(!qty||qty<=0){highlight('m-rqty');toast('Quantity must be > 0','err');return;}
+  const unit=v('m-runit'), cost=Number(v('m-rcost')||0), sup=v('m-rsup'), dn=v('m-rdn'), date=v('m-rdate'), notes=v('m-rnotes');
+  // Update or create inventory
+  let inv=DB.inventory.find(i=>i.projectId===DB.activeProjectId&&i.item===item.trim());
+  if(inv){ inv.inStore=Number(inv.inStore)+qty; inv.lastUpdated=date||now(); }
+  else { DB.inventory.push({id:uid(),projectId:DB.activeProjectId,item:item.trim(),unit,inStore:qty,minLevel:Math.round(qty*0.1),category:'Other',lastUpdated:date||now()}); }
+  // Add accounting transaction if cost set
+  if(cost>0){ DB.accounting.push({id:uid(),projectId:DB.activeProjectId,date:date||now(),description:`Stock receipt: ${qty} ${unit} ${item} (${dn||'no DN'}) from ${sup||'unknown'}`,category:'Materials',amount:qty*cost,type:'expense',ref:dn}); }
+  saveDB();closeModal();toast(`Stock received: ${qty} ${unit} of ${item}`,'ok');showPage('inventory');
+}
+function mIssueStock(invId) {
+  const inv=DB.inventory.find(i=>i.id===invId); if(!inv) return;
+  openModal(`Issue Stock — ${inv.item}`,`
+    <div style="padding:10px 12px;background:var(--navy);border-radius:var(--r);border:1px solid var(--navy-border);margin-bottom:14px;font-size:12px">
+      <span style="color:var(--tm)">Currently in store:</span> <b style="color:var(--accent)">${fmt(inv.inStore)} ${inv.unit}</b>
+    </div>
+    <div class="fg2">
+      <div class="fg"><label class="fl">Quantity to Issue <span class="req">*</span></label><input class="fi" id="m-iqty" type="number" min="0.01" max="${inv.inStore}" step="any" placeholder="0"></div>
+      <div class="fg"><label class="fl">Date</label><input class="fi" id="m-idate" type="date" value="${now()}"></div>
+      <div class="fg"><label class="fl">Issued To</label><input class="fi" id="m-ito" placeholder="Team or worker name"></div>
+      <div class="fg"><label class="fl">Zone / Activity</label><input class="fi" id="m-izone" placeholder="e.g. Zone A – Foundation"></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveIssueStock('${invId}')"><i class="fas fa-check"></i> Issue Stock</button>`);
+}
+function saveIssueStock(invId) {
+  const inv=DB.inventory.find(i=>i.id===invId); if(!inv) return;
+  const qty=Number(v('m-iqty'));
+  if(!qty||qty<=0){highlight('m-iqty');toast('Quantity must be > 0','err');return;}
+  if(qty>Number(inv.inStore)){highlight('m-iqty');toast(`Only ${inv.inStore} ${inv.unit} available`,'err');return;}
+  inv.inStore=Number(inv.inStore)-qty; inv.lastUpdated=now();
+  // Log as consumption
+  DB.consumption.push({id:uid(),projectId:DB.activeProjectId,date:v('m-idate')||now(),item:inv.item,qty,unit:inv.unit,zone:v('m-izone'),recordedBy:v('m-ito'),notes:'Issued from store'});
+  saveDB();closeModal();toast(`${qty} ${inv.unit} of ${inv.item} issued`,'ok');showPage('inventory');
+}
+function mEditInventory(id) {
+  const i=DB.inventory.find(x=>x.id===id); if(!i) return;
+  openModal(`Edit Inventory — ${i.item}`,`
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Item Name</label><input class="fi" id="m-einame" value="${esc(i.item)}"></div>
+      <div class="fg"><label class="fl">In Store</label><input class="fi" id="m-eistore" type="number" value="${i.inStore}"></div>
+      <div class="fg"><label class="fl">Minimum Level</label><input class="fi" id="m-eiminlvl" type="number" value="${i.minLevel}"></div>
+      <div class="fg"><label class="fl">Unit</label><select class="fs" id="m-eiunit">${['Bags','Tons','Units','Lengths','Sheets','m²','m³','m','Litres','Rolls','Pieces'].map(u=>`<option${i.unit===u?' selected':''}>${u}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Category</label><select class="fs" id="m-eicat">${['Masonry','Structural','Concrete','Timber','Roofing','Finishes','Services','Earthworks','Other'].map(c=>`<option${i.category===c?' selected':''}>${c}</option>`).join('')}</select></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveEditInventory('${id}')">Save</button>`);
+}
+function saveEditInventory(id) {
+  const i=DB.inventory.find(x=>x.id===id); if(!i) return;
+  i.item=v('m-einame')||i.item; i.inStore=Number(v('m-eistore'))||0; i.minLevel=Number(v('m-eiminlvl'))||0; i.unit=v('m-eiunit'); i.category=v('m-eicat'); i.lastUpdated=now();
+  saveDB();closeModal();toast('Inventory updated','ok');showPage('inventory');
+}
+function mStockMovement() {
+  openModal('Stock Movement / Adjustment',`
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Movement Type</label><select class="fs" id="m-smtype"><option>Physical count correction</option><option>Transfer to another site</option><option>Return to supplier</option><option>Loss / Theft</option><option>Other adjustment</option></select></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Material <span class="req">*</span></label><select class="fs" id="m-smitem">${scopedInventory().map(i=>`<option value="${i.id}">${i.item} (${i.inStore} ${i.unit})</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Adjusted Quantity (positive = add, negative = remove)</label><input class="fi" id="m-smqty" type="number" step="any" placeholder="e.g. -5 or +20"></div>
+      <div class="fg"><label class="fl">Date</label><input class="fi" id="m-smdate" type="date" value="${now()}"></div>
+    </div>
+    <div class="fg"><label class="fl">Reason</label><textarea class="ft" id="m-smreason" placeholder="Explain the adjustment…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveStockMovement()">Record Movement</button>`);
+}
+function saveStockMovement() {
+  const invId=v('m-smitem'), adj=Number(v('m-smqty'));
+  if(!adj){highlight('m-smqty');toast('Enter a quantity','err');return;}
+  const inv=DB.inventory.find(i=>i.id===invId); if(!inv) return;
+  const newQty=Number(inv.inStore)+adj;
+  if(newQty<0){toast('Adjustment would result in negative stock','err');return;}
+  inv.inStore=newQty; inv.lastUpdated=now();
+  saveDB();closeModal();toast(`Stock adjusted: ${inv.item} now ${inv.inStore} ${inv.unit}`,'ok');showPage('inventory');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — CONSUMPTION
+// ═══════════════════════════════════════════════════════
+function mLogConsumption() {
+  const inv=scopedInventory();
+  openModal('Log Material Consumption',`
+    <div class="fg2">
+      <div class="fg"><label class="fl">Date <span class="req">*</span></label><input class="fi" id="m-cdate" type="date" value="${now()}"></div>
+      <div class="fg"><label class="fl">Zone / Activity</label><input class="fi" id="m-czone" placeholder="e.g. Zone A – Foundation pour"></div>
+      <div class="fg"><label class="fl">Recorded By</label><input class="fi" id="m-cby" placeholder="Supervisor name"></div>
+      <div class="fg"><label class="fl">Material <span class="req">*</span></label><select class="fs" id="m-citem">${inv.length?inv.map(i=>`<option value="${i.item}" data-unit="${i.unit}" data-store="${i.inStore}">${i.item} (${i.inStore} ${i.unit} in store)</option>`).join(''):'<option>No inventory — add stock first</option>'}</select></div>
+      <div class="fg"><label class="fl">Quantity Used <span class="req">*</span></label><input class="fi" id="m-cqty" type="number" min="0.01" step="any" placeholder="0"></div>
+      <div class="fg"><label class="fl">Unit</label><input class="fi" id="m-cunit" placeholder="Auto-filled from selection" readonly style="color:var(--ts)"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-cnotes" placeholder="Optional notes…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveConsumption(false)"><i class="fas fa-check"></i> Log Entry</button>
+     <button class="btn btn-secondary" onclick="saveConsumption(true)">Log & Add Another</button>`);
+  // Auto-fill unit when item changes
+  setTimeout(()=>{
+    const sel=document.getElementById('m-citem');
+    const fillUnit=()=>{const opt=sel.options[sel.selectedIndex];if(opt)document.getElementById('m-cunit').value=opt.dataset.unit||'';};
+    sel&&sel.addEventListener('change',fillUnit);
+    fillUnit();
+  },50);
+}
+function saveConsumption(again) {
+  const item=v('m-citem'), qty=Number(v('m-cqty')), date=v('m-cdate');
+  if(!item||item==='No inventory — add stock first'){toast('Select a material — add inventory first','err');return;}
+  if(!qty||qty<=0){highlight('m-cqty');toast('Quantity must be > 0','err');return;}
+  // Deduct from inventory
+  const inv=DB.inventory.find(i=>i.projectId===DB.activeProjectId&&i.item===item);
+  if(inv){
+    if(qty>Number(inv.inStore)){toast(`Only ${inv.inStore} in store. Reduce quantity or receive more stock first.`,'err');return;}
+    inv.inStore=Number(inv.inStore)-qty; inv.lastUpdated=date||now();
+  }
+  DB.consumption.push({id:uid(),projectId:DB.activeProjectId,date:date||now(),item,qty,unit:v('m-cunit')||'',zone:v('m-czone'),recordedBy:v('m-cby'),notes:v('m-cnotes')});
+  saveDB();
+  if(again){closeModal();mLogConsumption();toast('Entry logged — log another','ok');}
+  else{closeModal();showPage('consumption');toast(`Consumption logged: ${qty} ${v('m-cunit')} ${item} — inventory and BOQ updated`,'ok');}
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — WASTAGE
+// ═══════════════════════════════════════════════════════
+function mLogWastage() {
+  const inv=scopedInventory();
+  openModal('Log Wastage / Loss',`
+    <div class="fg2">
+      <div class="fg"><label class="fl">Date</label><input class="fi" id="m-wdate" type="date" value="${now()}"></div>
+      <div class="fg"><label class="fl">Reported By</label><input class="fi" id="m-wby" placeholder="Name"></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Material <span class="req">*</span></label><select class="fs" id="m-witem"><option value="">Select material…</option>${inv.map(i=>`<option>${i.item}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Quantity Lost <span class="req">*</span></label><input class="fi" id="m-wqty" type="number" min="0.01" step="any"></div>
+      <div class="fg"><label class="fl">Unit</label><select class="fs" id="m-wunit"><option>Bags</option><option>Tons</option><option>Units</option><option>Lengths</option><option>Sheets</option><option>m²</option><option>m</option><option>Litres</option></select></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Reason</label><select class="fs" id="m-wreason"><option>Breakage – Transport</option><option>Water Damage</option><option>Theft</option><option>Poor Workmanship – Cuts</option><option>Cutting Offcuts</option><option>Weather Damage</option><option>Contamination</option><option>Fire Damage</option><option>Other</option></select></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Estimated Value of Loss (K)</label><input class="fi" id="m-wval" type="number" min="0" step="any" placeholder="0.00"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-wnotes"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveWastage()"><i class="fas fa-check"></i> Log Wastage</button>`);
+}
+function saveWastage() {
+  const item=v('m-witem'), qty=Number(v('m-wqty'));
+  if(!item){highlight('m-witem');toast('Select a material','err');return;}
+  if(!qty||qty<=0){highlight('m-wqty');toast('Quantity must be > 0','err');return;}
+  // Deduct from inventory if possible
+  const inv=DB.inventory.find(i=>i.projectId===DB.activeProjectId&&i.item===item);
+  if(inv&&qty<=Number(inv.inStore)){inv.inStore=Number(inv.inStore)-qty;inv.lastUpdated=now();}
+  DB.wastage.push({id:uid(),projectId:DB.activeProjectId,date:v('m-wdate')||now(),item,qty,unit:v('m-wunit'),reason:v('m-wreason'),value:Number(v('m-wval')||0),reportedBy:v('m-wby'),notes:v('m-wnotes')});
+  saveDB();closeModal();showPage('wastage');toast('Wastage recorded','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — REQUESTS
+// ═══════════════════════════════════════════════════════
+function mRaiseRequest() {
+  const boqItems=scopedBoq().map(b=>b.item);
+  openModal('Raise Material Request',`
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Material <span class="req">*</span></label><input class="fi" id="m-qitem" list="boq-q-list" placeholder="Material name"><datalist id="boq-q-list">${boqItems.map(i=>`<option value="${i}">`).join('')}</datalist></div>
+      <div class="fg"><label class="fl">Quantity <span class="req">*</span></label><input class="fi" id="m-qqty" type="number" min="0.01" step="any"></div>
+      <div class="fg"><label class="fl">Unit</label><select class="fs" id="m-qunit"><option>Bags</option><option>Tons</option><option>Units</option><option>Lengths</option><option>Sheets</option><option>m²</option><option>m³</option><option>m</option><option>Litres</option><option>Rolls</option></select></div>
+      <div class="fg"><label class="fl">Priority</label><select class="fs" id="m-qpri"><option>High</option><option>Medium</option><option>Low</option></select></div>
+      <div class="fg"><label class="fl">Requested By</label><input class="fi" id="m-qby" placeholder="Your name"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes / Justification</label><textarea class="ft" id="m-qnotes" placeholder="Why is this needed? Any urgency or context?"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveRequest()"><i class="fas fa-check"></i> Submit Request</button>`);
+}
+function saveRequest() {
+  const item=v('m-qitem'), qty=Number(v('m-qqty'));
+  if(!item.trim()){highlight('m-qitem');toast('Material name required','err');return;}
+  if(!qty||qty<=0){highlight('m-qqty');toast('Quantity must be > 0','err');return;}
+  DB.requests.push({id:uid(),projectId:DB.activeProjectId,item:item.trim(),qty,unit:v('m-qunit'),priority:v('m-qpri'),requestedBy:v('m-qby'),date:now(),status:'Pending',notes:v('m-qnotes')});
+  saveDB();closeModal();showPage('requests');toast('Request submitted — awaiting approval','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — PURCHASE ORDERS
+// ═══════════════════════════════════════════════════════
+function mCreatePO(prefill={}) {
+  const sups=DB.suppliers.map(s=>s.name);
+  const nextPO='PO-'+new Date().getFullYear()+'-'+String(DB.orders.length+1).padStart(3,'0');
+  openModal('Create Purchase Order',`
+    <div class="fg2">
+      <div class="fg"><label class="fl">PO Number</label><input class="fi" id="m-pono" value="${nextPO}"></div>
+      <div class="fg"><label class="fl">Supplier <span class="req">*</span></label><input class="fi" id="m-posup" list="sup-po-list" value="${esc(prefill.supplier||'')}" placeholder="Supplier name"><datalist id="sup-po-list">${sups.map(s=>`<option value="${s}">`).join('')}</datalist></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Material / Item <span class="req">*</span></label><input class="fi" id="m-poitem" value="${esc(prefill.item||'')}" placeholder="Item being ordered"></div>
+      <div class="fg"><label class="fl">Quantity <span class="req">*</span></label><input class="fi" id="m-poqty" type="number" min="0.01" step="any" value="${prefill.qty||''}"></div>
+      <div class="fg"><label class="fl">Unit</label><select class="fs" id="m-pounit">${['Bags','Tons','Units','Lengths','Sheets','m²','m³','m','Litres','Rolls','Pieces'].map(u=>`<option${prefill.unit===u?' selected':''}>${u}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Unit Price (K)</label><input class="fi" id="m-poprice" type="number" min="0" step="any" placeholder="0.00" oninput="updatePOTotal()"></div>
+      <div class="fg"><label class="fl">Total Value (K)</label><input class="fi" id="m-pototal" type="number" readonly style="color:var(--accent)" placeholder="Auto-calculated"></div>
+      <div class="fg"><label class="fl">Order Date</label><input class="fi" id="m-podate" type="date" value="${now()}"></div>
+      <div class="fg"><label class="fl">Expected Delivery</label><input class="fi" id="m-poexp" type="date"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-ponotes" placeholder="Terms, delivery instructions…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="savePO('${prefill.requestId||''}')"><i class="fas fa-check"></i> Issue PO</button>`);
+  setTimeout(()=>{
+    const q=document.getElementById('m-poqty'), p=document.getElementById('m-poprice');
+    q&&q.addEventListener('input',updatePOTotal);
+    p&&p.addEventListener('input',updatePOTotal);
+  },50);
+}
+function updatePOTotal() {
+  const q=Number(document.getElementById('m-poqty')?.value||0);
+  const p=Number(document.getElementById('m-poprice')?.value||0);
+  const t=document.getElementById('m-pototal');
+  if(t) t.value=(q*p).toFixed(2);
+}
+function savePO(requestId) {
+  const sup=v('m-posup'), item=v('m-poitem'), qty=Number(v('m-poqty'));
+  if(!sup.trim()){highlight('m-posup');toast('Supplier required','err');return;}
+  if(!item.trim()){highlight('m-poitem');toast('Item name required','err');return;}
+  if(!qty||qty<=0){highlight('m-poqty');toast('Quantity must be > 0','err');return;}
+  const unitPrice=Number(v('m-poprice')||0);
+  const total=Number(v('m-pototal')||0)||qty*unitPrice;
+  DB.orders.push({id:uid(),projectId:DB.activeProjectId,poNo:v('m-pono'),supplier:sup.trim(),item:item.trim(),qty,unit:v('m-pounit'),unitPrice,total,status:'Draft',orderDate:v('m-podate')||now(),expectedDate:v('m-poexp'),notes:v('m-ponotes')});
+  // Update request status if converted
+  if(requestId){const r=DB.requests.find(x=>x.id===requestId);if(r)r.status='Ordered';}
+  saveDB();closeModal();showPage('orders');toast('Purchase Order created','ok');
+}
+function mReceiveDelivery(orderId) {
+  const o=DB.orders.find(x=>x.id===orderId); if(!o) return;
+  openModal(`Receive Delivery — ${o.poNo}`,`
+    <div style="padding:10px 12px;background:var(--navy);border-radius:var(--r);border:1px solid var(--navy-border);margin-bottom:14px;font-size:12px">
+      <b>${o.item}</b> · ${o.qty} ${o.unit} from <b>${o.supplier}</b>
+    </div>
+    <div class="fg2">
+      <div class="fg"><label class="fl">Quantity Actually Received <span class="req">*</span></label><input class="fi" id="m-rdqty" type="number" value="${o.qty}" step="any"></div>
+      <div class="fg"><label class="fl">Date Received</label><input class="fi" id="m-rddate" type="date" value="${now()}"></div>
+      <div class="fg"><label class="fl">Delivery Note #</label><input class="fi" id="m-rddn" placeholder="DN-XXXXX"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-rdnotes" placeholder="Condition, shortages, damage…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveReceiveDelivery('${orderId}')"><i class="fas fa-truck-ramp-box"></i> Confirm Receipt</button>`);
+}
+function saveReceiveDelivery(orderId) {
+  const o=DB.orders.find(x=>x.id===orderId); if(!o) return;
+  const qty=Number(v('m-rdqty'));
+  if(!qty||qty<=0){highlight('m-rdqty');toast('Quantity must be > 0','err');return;}
+  o.status='Delivered'; o.receivedDate=v('m-rddate')||now(); o.receivedQty=qty; o.deliveryNote=v('m-rddn');
+  // Update inventory
+  let inv=DB.inventory.find(i=>i.projectId===DB.activeProjectId&&i.item===o.item);
+  if(inv){inv.inStore=Number(inv.inStore)+qty;inv.lastUpdated=now();}
+  else DB.inventory.push({id:uid(),projectId:DB.activeProjectId,item:o.item,unit:o.unit,inStore:qty,minLevel:Math.round(qty*0.1),category:'Other',lastUpdated:now()});
+  // Add accounting transaction
+  if(o.total>0) DB.accounting.push({id:uid(),projectId:DB.activeProjectId,date:v('m-rddate')||now(),description:`Delivery received: ${qty} ${o.unit} ${o.item} from ${o.supplier} (${o.poNo})`,category:'Materials',amount:o.total,type:'expense',ref:o.poNo});
+  saveDB();closeModal();showPage('orders');toast(`Delivery received — inventory updated +${qty} ${o.unit} ${o.item}`,'ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — TOOLS
+// ═══════════════════════════════════════════════════════
+function mAddTool() {
+  openModal('Register Tool / Equipment',`
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Tool Name <span class="req">*</span></label><input class="fi" id="m-tname" placeholder="e.g. Concrete Mixer 350L"></div>
+      <div class="fg"><label class="fl">Serial Number</label><input class="fi" id="m-tser" placeholder="XX-000"></div>
+      <div class="fg"><label class="fl">Status</label><select class="fs" id="m-tstat"><option>Available</option><option>Assigned</option><option>Damaged</option><option>Under Repair</option></select></div>
+      <div class="fg"><label class="fl">Condition</label><select class="fs" id="m-tcond"><option>Good</option><option>Fair</option><option>Poor</option></select></div>
+      <div class="fg"><label class="fl">Replacement Value (K)</label><input class="fi" id="m-tval" type="number" min="0" placeholder="0.00"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-tnotes" placeholder="Any relevant notes…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveTool(null)">Register</button>`);
+}
+function mEditTool(id) {
+  const t=DB.tools.find(x=>x.id===id); if(!t) return;
+  openModal('Edit Tool',`
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Name</label><input class="fi" id="m-tname" value="${esc(t.name)}"></div>
+      <div class="fg"><label class="fl">Serial No.</label><input class="fi" id="m-tser" value="${esc(t.serialNo||'')}"></div>
+      <div class="fg"><label class="fl">Status</label><select class="fs" id="m-tstat">${['Available','Assigned','Damaged','Under Repair','Lost','Retired'].map(s=>`<option${t.status===s?' selected':''}>${s}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Condition</label><select class="fs" id="m-tcond">${['Good','Fair','Poor'].map(c=>`<option${t.condition===c?' selected':''}>${c}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Value (K)</label><input class="fi" id="m-tval" type="number" value="${t.value||0}"></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-tnotes">${esc(t.notes||'')}</textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveTool('${id}')">Save</button>`);
+}
+function saveTool(id) {
+  const name=v('m-tname');
+  if(!name.trim()){highlight('m-tname');toast('Tool name required','err');return;}
+  const data={id:id||uid(),projectId:DB.activeProjectId,name:name.trim(),serialNo:v('m-tser'),status:v('m-tstat'),condition:v('m-tcond'),value:Number(v('m-tval')||0),notes:v('m-tnotes'),assignedTo:id?DB.tools.find(x=>x.id===id)?.assignedTo||'':''};
+  if(id){const i=DB.tools.findIndex(x=>x.id===id);DB.tools[i]={...DB.tools[i],...data};}
+  else DB.tools.push(data);
+  saveDB();closeModal();showPage('tools');toast(id?'Tool updated':'Tool registered','ok');
+}
+function mAssignTool(id) {
+  const t=DB.tools.find(x=>x.id===id); if(!t) return;
+  openModal(`Assign — ${t.name}`,`
+    <div class="fg2">
+      <div class="fg"><label class="fl">Assign To</label><input class="fi" id="m-ato" value="${esc(t.assignedTo||'')}" placeholder="Team or person"></div>
+      <div class="fg"><label class="fl">Expected Return Date</label><input class="fi" id="m-aret" type="date"></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveAssignTool('${id}')">Assign</button>`);
+}
+function saveAssignTool(id) {
+  const t=DB.tools.find(x=>x.id===id); if(!t) return;
+  const to=v('m-ato');
+  t.assignedTo=to; t.status=to?'Assigned':'Available'; t.expectedReturn=v('m-aret');
+  saveDB();closeModal();showPage('tools');toast(to?`Tool assigned to ${to}`:'Tool returned to store','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — SUPPLIERS
+// ═══════════════════════════════════════════════════════
+function mAddSupplier() {
+  openModal('Add Supplier',`
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Company Name <span class="req">*</span></label><input class="fi" id="m-sname" placeholder="e.g. Lafarge Zambia Ltd"></div>
+      <div class="fg"><label class="fl">Contact Number</label><input class="fi" id="m-scontact" placeholder="0977 XXX XXX"></div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" id="m-semail" type="email" placeholder="supplier@email.com"></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Materials Supplied</label><input class="fi" id="m-smats" placeholder="e.g. Cement, Concrete Products, Blocks"></div>
+      <div class="fg"><label class="fl">Rating (1-5)</label><select class="fs" id="m-srat"><option value="5">★★★★★ Excellent</option><option value="4">★★★★☆ Good</option><option value="3" selected>★★★☆☆ Average</option><option value="2">★★☆☆☆ Below Average</option><option value="1">★☆☆☆☆ Poor</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-snotes" placeholder="Payment terms, lead times, contact person…"></textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveSupplier(null)">Add Supplier</button>`);
+}
+function mEditSupplier(id) {
+  const s=DB.suppliers.find(x=>x.id===id); if(!s) return;
+  openModal('Edit Supplier',`
+    <div class="fg2">
+      <div class="fg" style="grid-column:span 2"><label class="fl">Name</label><input class="fi" id="m-sname" value="${esc(s.name)}"></div>
+      <div class="fg"><label class="fl">Contact</label><input class="fi" id="m-scontact" value="${esc(s.contact||'')}"></div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" id="m-semail" value="${esc(s.email||'')}"></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Materials</label><input class="fi" id="m-smats" value="${esc(s.materials||'')}"></div>
+      <div class="fg"><label class="fl">Rating</label><select class="fs" id="m-srat">${[5,4,3,2,1].map(r=>`<option value="${r}"${s.rating==r?' selected':''}>${'★'.repeat(r)}${'☆'.repeat(5-r)}</option>`).join('')}</select></div>
+    </div>
+    <div class="fg"><label class="fl">Notes</label><textarea class="ft" id="m-snotes">${esc(s.notes||'')}</textarea></div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveSupplier('${id}')">Save</button>`);
+}
+function saveSupplier(id) {
+  const name=v('m-sname');
+  if(!name.trim()){highlight('m-sname');toast('Supplier name required','err');return;}
+  const data={id:id||uid(),name:name.trim(),contact:v('m-scontact'),email:v('m-semail'),materials:v('m-smats'),rating:Number(v('m-srat'))||3,notes:v('m-snotes')};
+  if(id){const i=DB.suppliers.findIndex(x=>x.id===id);DB.suppliers[i]={...DB.suppliers[i],...data};}
+  else DB.suppliers.push(data);
+  saveDB();closeModal();showPage('suppliers');toast(id?'Supplier updated':'Supplier added','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — ACCOUNTING
+// ═══════════════════════════════════════════════════════
+function mAddTransaction() {
+  openModal('Add Transaction',`
+    <div class="fg2">
+      <div class="fg"><label class="fl">Date</label><input class="fi" id="m-adate" type="date" value="${now()}"></div>
+      <div class="fg"><label class="fl">Type</label><select class="fs" id="m-atype"><option value="expense">Expense</option><option value="income">Income</option></select></div>
+      <div class="fg"><label class="fl">Category</label><select class="fs" id="m-acat"><option>Materials</option><option>Labour</option><option>Equipment</option><option>Fuel</option><option>Site Expenses</option><option>Subcontractors</option><option>Professional Fees</option><option>Overheads</option><option>Income</option><option>Other</option></select></div>
+      <div class="fg"><label class="fl">Amount (K) <span class="req">*</span></label><input class="fi" id="m-aamt" type="number" min="0.01" step="any" placeholder="0.00"></div>
+      <div class="fg" style="grid-column:span 2"><label class="fl">Description <span class="req">*</span></label><input class="fi" id="m-adesc" placeholder="What is this transaction for?"></div>
+      <div class="fg"><label class="fl">Reference #</label><input class="fi" id="m-aref" placeholder="Invoice, receipt no."></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveTransaction()">Save Transaction</button>`);
+}
+function saveTransaction() {
+  const desc=v('m-adesc'), amt=Number(v('m-aamt'));
+  if(!desc.trim()){highlight('m-adesc');toast('Description required','err');return;}
+  if(!amt||amt<=0){highlight('m-aamt');toast('Amount must be > 0','err');return;}
+  DB.accounting.push({id:uid(),projectId:DB.activeProjectId,date:v('m-adate')||now(),description:desc.trim(),category:v('m-acat'),amount:amt,type:v('m-atype'),ref:v('m-aref')});
+  saveDB();closeModal();showPage('accounting');toast('Transaction saved','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODALS — USERS
+// ═══════════════════════════════════════════════════════
+function mAddUser() {
+  openModal('Add User',`
+    <div class="fg2">
+      <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input class="fi" id="m-uname" placeholder="Full name"></div>
+      <div class="fg"><label class="fl">Email <span class="req">*</span></label><input class="fi" id="m-uemail" type="email" placeholder="email@company.com"></div>
+      <div class="fg"><label class="fl">Role</label><select class="fs" id="m-urole"><option>Administrator</option><option>Site Manager</option><option>Procurement Officer</option><option>Site Supervisor</option><option>Storekeeper</option></select></div>
+      <div class="fg"><label class="fl">Status</label><select class="fs" id="m-ustat"><option>Active</option><option>Inactive</option></select></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveUser(null)">Create User</button>`);
+}
+function mEditUser(id) {
+  const u=DB.users.find(x=>x.id===id); if(!u) return;
+  openModal('Edit User',`
+    <div class="fg2">
+      <div class="fg"><label class="fl">Full Name</label><input class="fi" id="m-uname" value="${esc(u.name)}"></div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" id="m-uemail" value="${esc(u.email)}"></div>
+      <div class="fg"><label class="fl">Role</label><select class="fs" id="m-urole">${['Administrator','Site Manager','Procurement Officer','Site Supervisor','Storekeeper'].map(r=>`<option${u.role===r?' selected':''}>${r}</option>`).join('')}</select></div>
+      <div class="fg"><label class="fl">Status</label><select class="fs" id="m-ustat">${['Active','Inactive'].map(s=>`<option${u.status===s?' selected':''}>${s}</option>`).join('')}</select></div>
+    </div>`,
+    `<button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveUser('${id}')">Save</button>`);
+}
+function saveUser(id) {
+  const name=v('m-uname'), email=v('m-uemail');
+  if(!name.trim()){highlight('m-uname');toast('Name required','err');return;}
+  if(!email.trim()){highlight('m-uemail');toast('Email required','err');return;}
+  const data={id:id||uid(),name:name.trim(),email:email.trim(),role:v('m-urole'),status:v('m-ustat'),createdAt:id?undefined:now()};
+  if(id){const i=DB.users.findIndex(x=>x.id===id);DB.users[i]={...DB.users[i],...data};}
+  else DB.users.push(data);
+  saveDB();closeModal();showPage('users');toast(id?'User updated':'User created','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODAL UTILITIES
+// ═══════════════════════════════════════════════════════
+function openModal(title, body, footer='') {
+  document.getElementById('modal-body').innerHTML=`<div class="modal-title">${title}</div>${body}<div class="modal-footer">${footer}</div>`;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
+function v(id) { const el=document.getElementById(id); return el?el.value:''; }
+function highlight(id) { const el=document.getElementById(id); if(el){el.classList.add('invalid');setTimeout(()=>el.classList.remove('invalid'),2000);} }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function toast(msg, type='') {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast'+(type?' '+type:'');
+  void t.offsetWidth; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ═══════════════════════════════════════════════════════
+//  AI PANEL
+// ═══════════════════════════════════════════════════════
+let aiHistory=[], aiThinking=false, aiCollapsed=false;
+function toggleAI(){
+  aiCollapsed=!aiCollapsed;
+  document.getElementById('aip').classList.toggle('collapsed',aiCollapsed);
+  document.getElementById('aip-col-icon').innerHTML=`<i class="fas fa-chevron-${aiCollapsed?'left':'right'}"></i>`;
+}
+function aiResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,90)+'px';}
+function aiKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAI();}}
+function sq(t){document.getElementById('aip-inp').value=t;sendAI();}
+function aiScroll(){const m=document.getElementById('aip-msgs');m.scrollTop=m.scrollHeight;}
+function addAIMsg(role, html, time){
+  const d=document.createElement('div');
+  d.className=`ai-m ${role}`;
+  const nm=role==='mgr'?'Foreman AI':'You';
+  d.innerHTML=`<div class="ai-m-role">${nm}</div><div class="ai-m-bub">${html}</div><div class="ai-m-time">${time||ts()}</div>`;
+  document.getElementById('aip-msgs').appendChild(d); aiScroll();
+}
+function addTyping(){
+  const d=document.createElement('div'); d.id='ai-typ'; d.className='ai-m mgr';
+  d.innerHTML=`<div class="ai-m-role">Foreman AI</div><div class="ai-m-bub"><div class="ai-typing"><span></span><span></span><span></span></div></div>`;
+  document.getElementById('aip-msgs').appendChild(d); aiScroll();
+}
+function rmTyping(){const e=document.getElementById('ai-typ');if(e)e.remove();}
+
+function buildContext(){
+  if(!DB.activeProjectId) return 'No active project selected.';
+  const proj=activeProject();
+  const boq=computedBoq();
+  const inv=scopedInventory();
+  const low=inv.filter(i=>Number(i.inStore)<=Number(i.minLevel));
+  const crit=inv.filter(i=>Number(i.inStore)<Number(i.minLevel)*0.5);
+  const pend=scopedRequests().filter(r=>r.status==='Pending');
+  const transit=scopedOrders().filter(o=>o.status==='In Transit');
+  const acc=scopedAccounting();
+  const te=acc.filter(a=>a.type==='expense').reduce((s,a)=>s+Number(a.amount),0);
+  const ti=acc.filter(a=>a.type==='income').reduce((s,a)=>s+Number(a.amount),0);
+  const wv=scopedWastage().reduce((s,w)=>s+Number(w.value),0);
+  return `=== LIVE SITE DATA — ${new Date().toDateString()} ===
+PROJECT: ${proj.name} | Client: ${proj.client||'N/A'} | Location: ${proj.location||'N/A'}
+Budget: K${fmt(proj.budget||0)} | Spent: K${fmt(te)} | Income: K${fmt(ti)} | Progress: ${computeProgress()}%
+
+INVENTORY (${inv.length} items):
+${inv.map(i=>{const st=Number(i.inStore)<Number(i.minLevel)*0.5?'CRITICAL':Number(i.inStore)<=Number(i.minLevel)?'LOW':'OK';return `  ${i.item}: ${i.inStore} ${i.unit} | Min: ${i.minLevel} | [${st}]`;}).join('\n')||'  None'}
+
+BOQ PROGRESS (${boq.length} items):
+${boq.map(b=>`  ${b.item}: ${pct(b.used,b.required)}% used (${fmt(b.used)}/${fmt(b.required)} ${b.unit})`).join('\n')||'  None'}
+
+PENDING PROCUREMENT REQUESTS (${pend.length}):
+${pend.map(r=>`  ${r.item}: ${r.qty} ${r.unit} | Priority: ${r.priority} | ${r.notes||''}`).join('\n')||'  None'}
+
+ACTIVE PURCHASE ORDERS IN TRANSIT (${transit.length}):
+${transit.map(o=>`  ${o.poNo} | ${o.item} ${o.qty} ${o.unit} from ${o.supplier} | Expected: ${o.expectedDate||'TBD'}`).join('\n')||'  None'}
+
+WASTAGE THIS PERIOD: K${fmt(wv)} across ${scopedWastage().length} incidents
+CRITICAL STOCK: ${crit.length>0?crit.map(i=>i.item).join(', '):'None'}
+LOW STOCK: ${low.length>0?low.map(i=>i.item).join(', '):'None'}`;
+}
+
+async function sendAI(){
+  if(aiThinking) return;
+  const inp=document.getElementById('aip-inp');
+  const txt=inp.value.trim(); if(!txt) return;
+  inp.value=''; inp.style.height='auto';
+  document.getElementById('aip-send').disabled=true;
+  aiThinking=true;
+  addAIMsg('usr',esc(txt));
+  addTyping();
+  const ctx=buildContext();
+  const sys=`You are Foreman AI — a decisive, experienced virtual site manager for a construction project in Zambia. You have full live access to the site data below.
+
+Your job:
+- Give clear NUMBERED ACTIONABLE INSTRUCTIONS when action is needed
+- Flag issues using [CRITICAL], [WARNING], [OK], or [INFO] on lines that need it
+- Speak like a real site manager — direct, specific, no fluff
+- Reference actual quantities, suppliers, PO numbers, and names from the data
+- When user reports an event, assess its impact and issue specific instructions
+- For briefings: Status Overview → Critical Issues → Today's Instructions → Watch Items
+- Use **bold** for key numbers and material names
+- Keep responses under 250 words unless a full briefing is requested
+
+LIVE SITE DATA:
+${ctx}`;
+  const msgs=[...aiHistory,{role:'user',content:txt}];
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages})});
+    const data=await res.json();
+    if(data.error) throw new Error(data.error.message);
+    const reply=data.content.find(c=>c.type==='text')?.text||'No response.';
+    aiHistory.push({role:'user',content:txt},{role:'assistant',content:reply});
+    if(aiHistory.length>20) aiHistory=aiHistory.slice(-20);
+    rmTyping();
+    const fmtd=fmtAI(reply);
+    const chips=detectChips(reply,txt);
+    addAIMsg('mgr', fmtd+(chips.length?`<div class="ai-chips">${chips.map(c=>`<span class="ai-chip" onclick="${c.fn}"><i class="fas ${c.i}"></i> ${c.l}</span>`).join('')}</div>`:'')); 
+  } catch(e) {
+    rmTyping();
+    addAIMsg('mgr',`<span style="color:var(--red)">Connection failed: ${esc(e.message)}</span> — All manual features are fully functional.`);
+  }
+  aiThinking=false; document.getElementById('aip-send').disabled=false;
+}
+function fmtAI(txt){
+  let h=esc(txt);
+  h=h.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
+  if(/^\d+\./m.test(h)){
+    const lines=h.split('\n'); let out='', inList=false;
+    lines.forEach(l=>{
+      const m=l.match(/^(\d+)\.\s+(.+)/);
+      if(m){if(!inList){out+='<div class="ai-instr">';inList=true;}out+=`<div class="ai-instr-row"><span class="ai-instr-n">${m[1]}.</span><span class="ai-instr-t">${m[2]}</span></div>`;}
+      else{if(inList){out+='</div>';inList=false;}if(l.trim())out+=flagLine(l);}
+    });
+    if(inList)out+='</div>';
+    return out;
+  }
+  return h.split('\n').filter(l=>l.trim()).map(l=>flagLine(l)).join('');
+}
+function flagLine(l){
+  if(l.includes('[CRITICAL]')||l.startsWith('CRITICAL:')) return `<div class="ai-flag red"><i class="fas fa-circle-xmark"></i><span>${l.replace('[CRITICAL]','').replace('CRITICAL:','').trim()}</span></div>`;
+  if(l.includes('[WARNING]')||l.startsWith('WARNING:')) return `<div class="ai-flag amber"><i class="fas fa-triangle-exclamation"></i><span>${l.replace('[WARNING]','').replace('WARNING:','').trim()}</span></div>`;
+  if(l.includes('[OK]')||l.startsWith('OK:')) return `<div class="ai-flag green"><i class="fas fa-circle-check"></i><span>${l.replace('[OK]','').replace('OK:','').trim()}</span></div>`;
+  if(l.includes('[INFO]')||l.startsWith('INFO:')) return `<div class="ai-flag blue"><i class="fas fa-circle-info"></i><span>${l.replace('[INFO]','').replace('INFO:','').trim()}</span></div>`;
+  return `<div style="margin-bottom:3px">${l}</div>`;
+}
+function detectChips(r,u){
+  const chips=[]; const rl=r.toLowerCase(), ul=u.toLowerCase();
+  if(rl.includes('consumption')||rl.includes('log')||ul.includes('used')||ul.includes('consumed')) chips.push({l:'Log Consumption',i:'fa-gauge-high',fn:'showPage("consumption");mLogConsumption()'});
+  if(rl.includes('request')||rl.includes('raise')) chips.push({l:'Raise Request',i:'fa-file-circle-plus',fn:'showPage("requests");mRaiseRequest()'});
+  if(rl.includes('purchase order')||rl.includes('issue po')) chips.push({l:'Create PO',i:'fa-file-invoice',fn:'showPage("orders");mCreatePO({})'});
+  if(rl.includes('wastage')||ul.includes('broke')||ul.includes('spilled')||ul.includes('damaged')) chips.push({l:'Log Wastage',i:'fa-trash-can-arrow-up',fn:'showPage("wastage");mLogWastage()'});
+  if(rl.includes('receive')||ul.includes('arrived')||ul.includes('delivered')) chips.push({l:'Receive Stock',i:'fa-boxes-stacked',fn:'showPage("inventory");mReceiveStock()'});
+  return chips.slice(0,3);
+}
+function initAI(){
+  if(!DB.activeProjectId){
+    addAIMsg('mgr','Good day. I\'m <b>Foreman AI</b> — your virtual site manager.<br><br>No project is active yet. <span style="color:var(--accent)">Create or select a project</span> and I\'ll have full visibility of your site data to give you real instructions.');
+    return;
+  }
+  const low=scopedInventory().filter(i=>Number(i.inStore)<=Number(i.minLevel));
+  const pend=scopedRequests().filter(r=>r.status==='Pending');
+  const crit=scopedInventory().filter(i=>Number(i.inStore)<Number(i.minLevel)*0.5);
+  const p=activeProject();
+  let msg=`Good day. I'm your AI Site Manager for <b>${p.name}</b>.\n\n`;
+  if(crit.length>0) msg+=`[CRITICAL] ${crit.length} material(s) below 50% minimum: **${crit.map(i=>i.item).join(', ')}**\n`;
+  if(low.length>0&&crit.length===0) msg+=`[WARNING] **${low.length} item(s)** at or below minimum stock level\n`;
+  if(pend.length>0) msg+=`[WARNING] **${pend.length} procurement request(s)** pending approval\n`;
+  if(crit.length===0&&low.length===0&&pend.length===0) msg+=`[OK] Site data looks healthy — no critical flags.\n`;
+  msg+=`\nUse the quick buttons or tell me what's happening on site.`;
+  addAIMsg('mgr',fmtAI(msg));
+}
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+showPage('dashboard');
+updateSidebar();
+updateBadges();
+initAI();
+</script>
+</body>
+</html>
