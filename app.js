@@ -72,7 +72,13 @@ function importBackup(event) {
   const reader = new FileReader();
   reader.onload = () => {
     try {
-      const incoming = normalizeBackup(String(reader.result || ''));
+      const raw = String(reader.result || '');
+      const peek = JSON.parse(raw);
+      if (peek && (peek.type === 'materials-import' || (Array.isArray(peek.items) && !peek.data))) {
+        applyMaterialsImport(peek);
+        return;
+      }
+      const incoming = normalizeBackup(raw);
       if (!confirm('Import this backup and replace the current browser data? Export a backup first if you need to keep the current state.')) return;
       DB = incoming;
       saveDB();
@@ -89,7 +95,6 @@ function importBackup(event) {
 }
 
 function triggerMaterialsImport() {
-  if (!DB.activeProjectId) { toast('Select a project first','err'); return; }
   document.getElementById('materials-file').click();
 }
 
@@ -97,42 +102,49 @@ function importMaterials(event) {
   const file = event.target.files && event.target.files[0];
   event.target.value = '';
   if (!file) return;
-  if (!DB.activeProjectId) { toast('Select a project first','err'); return; }
   const reader = new FileReader();
   reader.onload = () => {
     try {
-      const parsed = JSON.parse(String(reader.result || ''));
-      const items = Array.isArray(parsed) ? parsed : parsed.items;
-      if (!Array.isArray(items) || !items.length) throw new Error('No materials found in file. Expected an "items" array.');
-      let added = 0, updated = 0;
-      items.forEach(raw => {
-        if (!raw || typeof raw !== 'object') return;
-        const item = cleanInput(raw.item || raw.material || '');
-        if (!item) return;
-        const qty = safeNum(raw.qty !== undefined ? raw.qty : raw.quantity);
-        const unit = cleanInput(raw.unit || 'Units');
-        const category = cleanInput(raw.category || 'Other');
-        const minLevel = safeNum(raw.minLevel);
-        const existing = DB.inventory.find(i => i.projectId === DB.activeProjectId && i.item.toLowerCase() === item.toLowerCase());
-        if (existing) {
-          existing.inStore = safeNum(existing.inStore) + qty;
-          if (minLevel > 0) existing.minLevel = minLevel;
-          existing.lastUpdated = now();
-          updated++;
-        } else {
-          DB.inventory.push({ id: uid(), projectId: DB.activeProjectId, item, unit, inStore: qty, minLevel, category, lastUpdated: now() });
-          added++;
-        }
-      });
-      if (!added && !updated) throw new Error('No valid materials in file. Each item needs at least an "item" name.');
-      saveDB();
-      showPage('inventory');
-      toast(`Materials imported — ${added} added, ${updated} updated`, 'ok');
+      applyMaterialsImport(JSON.parse(String(reader.result || '')), file.name);
     } catch (e) {
       toast(e.message || 'Could not import materials', 'err');
     }
   };
   reader.readAsText(file);
+}
+
+function applyMaterialsImport(parsed, fileName) {
+  const items = Array.isArray(parsed) ? parsed : parsed.items;
+  if (!Array.isArray(items) || !items.length) throw new Error('No materials found in file. Expected an "items" array.');
+  if (!DB.activeProjectId) {
+    const proj = { id: uid(), name: cleanInput(parsed.project || String(fileName||'').replace(/\.json$/i,'')) || 'Imported Project', client:'', location:'', status:'Active', budget:0, ref:'', startDate:'', endDate:'', description:'Created by materials import.', createdAt: now() };
+    DB.projects.push(proj);
+    DB.activeProjectId = proj.id;
+  }
+  let added = 0, updated = 0;
+  items.forEach(raw => {
+    if (!raw || typeof raw !== 'object') return;
+    const item = cleanInput(raw.item || raw.material || '');
+    if (!item) return;
+    const qty = safeNum(raw.qty !== undefined ? raw.qty : raw.quantity);
+    const unit = cleanInput(raw.unit || 'Units');
+    const category = cleanInput(raw.category || 'Other');
+    const minLevel = safeNum(raw.minLevel);
+    const existing = DB.inventory.find(i => i.projectId === DB.activeProjectId && i.item.toLowerCase() === item.toLowerCase());
+    if (existing) {
+      existing.inStore = safeNum(existing.inStore) + qty;
+      if (minLevel > 0) existing.minLevel = minLevel;
+      existing.lastUpdated = now();
+      updated++;
+    } else {
+      DB.inventory.push({ id: uid(), projectId: DB.activeProjectId, item, unit, inStore: qty, minLevel, category, lastUpdated: now() });
+      added++;
+    }
+  });
+  if (!added && !updated) throw new Error('No valid materials in file. Each item needs at least an "item" name.');
+  saveDB();
+  showPage('inventory');
+  toast(`Materials imported — ${added} added, ${updated} updated`, 'ok');
 }
 
 function freshDB() {
@@ -1583,25 +1595,7 @@ function initAI(){
   addAIMsg('mgr',fmtAI(msg));
 }
 
-async function loadSeedFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const shouldSeed = params.get('seed') === 'foodbox' || DB.projects.length === 0;
-  if (!shouldSeed) return false;
-  const res = await fetch('foodbox-project.json', { cache: 'no-store' });
-  if (!res.ok) throw new Error(`Could not load Food Box seed (${res.status})`);
-  DB = normalizeBackup(await res.text());
-  saveDB();
-  if (params.get('seed')) history.replaceState(null, '', window.location.pathname);
-  toast('Food Box project loaded', 'ok');
-  return true;
-}
-
-async function initApp() {
-  try {
-    await loadSeedFromUrl();
-  } catch(e) {
-    toast(e.message || 'Could not load project seed', 'err');
-  }
+function initApp() {
   showPage('dashboard');
   updateSidebar();
   updateBadges();
